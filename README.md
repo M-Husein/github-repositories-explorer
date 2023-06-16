@@ -11,13 +11,19 @@ React application which integrates with github.com API and allows user to search
 ### Features:
 
 - Light or dark mode toggle.
-- User search by username.
+- Search user by username.
 - User repository list.
-- Repository detail.
+- Repository details.
+
+### App screenshots
 
 ![Home](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home.png)
 
-![Home Dark](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home_dark.png)
+![Home dark](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home_dark.png)
+
+![Search result](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/search_result.png)
+
+![Search result dark](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/search_result_dark.png)
 
 ## Project setup
 
