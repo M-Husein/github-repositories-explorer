@@ -7,7 +7,9 @@ React application which integrates with github.com API and allows user to search
 
 Clone or download this repo.
 
-First is Important copy or rename file .env.example to .env and configuration your GitHub token.
+First is Important copy or rename file **.env.example** to **.env** and configuration your GitHub access token.
+Follow this link to create and get GitHub access token.
+[GitHub access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
 Then install dependencies:
 
