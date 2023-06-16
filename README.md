@@ -1,3 +1,9 @@
+	
+# GitHub repositories explorer
+
+React application which integrates with github.com API and allows user to search for up to 5 users with a username similar to the value entered in text input.
+#
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
