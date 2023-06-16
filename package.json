@@ -1,6 +1,7 @@
 {
   "name": "github-repositories-explorer",
   "version": "0.1.0",
+  "author": "Muhamad Husein",
   "private": true,
   "scripts": {
     "dev": "next dev",

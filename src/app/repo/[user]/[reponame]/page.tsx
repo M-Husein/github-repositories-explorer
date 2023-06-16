@@ -38,6 +38,7 @@ const CodeDisplay = ({
       style={theme === 'dark' ? materialDark : materialLight}
       {...etc}
     >
+      {/* eslint-disable-next-line */}
       {String(children).replace(/\n$/, '')}
     </SyntaxHighlighter>
   );
@@ -78,7 +79,9 @@ export default function Detail({ params }: { params: { user: string, reponame: s
         api.setError(e);
       }
     })();
-  }, []);
+
+    /* eslint-disable-next-line */
+  }, [user, reponame]);
 
   const selectAll = (e: any) => {
     e.target.select()
@@ -244,9 +247,10 @@ export default function Detail({ params }: { params: { user: string, reponame: s
                     return !inline && match ? (
                       <CodeDisplay
                         language={match[1]}
-                        children={children}
                         {...props}
-                      />
+                      >
+                        {children}
+                      </CodeDisplay>
                     ) : (
                       <code className={className} {...props}>
                         {children}
