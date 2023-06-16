@@ -42,29 +42,34 @@ export const ListRepo = ({ list }: any) => {
       <>
         <div className="sticky top-108px z-20 pt-4 bg-body-tertiary">
           <h6>Repositories ({list.length})</h6>
-          <div className="input-group">
-            <label className="input-group-text" htmlFor={"inputSearchRepo" + list.id}>
-              <BsSearch />
-            </label>
-            <FormControl
-              id={"inputSearchRepo" + list.id}
-              type="search"
-              placeholder="Search repository"
-              value={filterValue}
-              onChange={filterByRepo}
-            />
-            <select
-              className="form-select capitalize"
-              style={{ width: 170, flex: 'none' }}
-              value={filterLang}
-              onChange={filterByLanguage}
-            >
-              <option value="all">All</option>
-              {/* @ts-ignore */}
-              {[...new Set(list.map((repo: any) => repo.language || "unknown"))].map((lang: string) =>
-                <option key={lang} value={lang}>{lang}</option>
-              )}
-            </select>
+          <div className="row g-2">
+            <div className="col-sm-9">
+              <div className="input-group">
+                <label className="input-group-text" htmlFor={"inputSearchRepo" + list.id}>
+                  <BsSearch />
+                </label>
+                <FormControl
+                  id={"inputSearchRepo" + list.id}
+                  type="search"
+                  placeholder="Search repository"
+                  value={filterValue}
+                  onChange={filterByRepo}
+                />
+              </div>
+            </div>
+            <div className="col-sm-3">
+              <select
+                className="form-select capitalize"
+                value={filterLang}
+                onChange={filterByLanguage}
+              >
+                <option value="all">All</option>
+                {/* @ts-ignore */}
+                {[...new Set(list.map((repo: any) => repo.language || "unknown"))].map((lang: string) =>
+                  <option key={lang} value={lang}>{lang}</option>
+                )}
+              </select>
+            </div>
           </div>
           <hr />
         </div>
