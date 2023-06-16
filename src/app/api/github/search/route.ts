@@ -8,7 +8,7 @@ export const POST = async (request: Request) => {
 
     if(!username){
       return NextResponse.json(
-        { error: "username is required" },
+        { error: "Username is required" },
         { status: 400 }
       );
     }
@@ -23,7 +23,7 @@ export const POST = async (request: Request) => {
     return NextResponse.json(data);
   } catch(e) {
     return NextResponse.json(
-      { message: "Server Error" },
+      { message: "Something wrong" },
       { status: 500 }
     );
   }

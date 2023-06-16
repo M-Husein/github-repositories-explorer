@@ -9,7 +9,7 @@ export const GET = async (request: Request) => {
 
     if(!username){
       return NextResponse.json(
-        { error: "username is required" },
+        { error: "Username is required" },
         { status: 400 }
       );
     }
@@ -32,7 +32,7 @@ export const GET = async (request: Request) => {
     return NextResponse.json({ profile, repos });
   } catch(e){
     return NextResponse.json(
-      { message: "Server Error" },
+      { message: "Something wrong" },
       { status: 500 }
     );
   }

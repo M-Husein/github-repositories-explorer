@@ -52,14 +52,21 @@ export default function Detail({ params }: { params: { user: string, reponame: s
   const [markdown, setMarkdown] = useState<any>('');
 
   useEffect(() => {
+    let controllerGetDetail: any = new AbortController();
+    let controllerGetReadme: any = null;
+
     (async () => {
       try {
-        const res: any = await fetchApi(`/api/github/detail?username=${user}&repo=${reponame}`);
+        const res: any = await fetchApi(`/api/github/detail?username=${user}&repo=${reponame}`, { signal: controllerGetDetail.signal });
         setData(res);
 
         if(res){
+          controllerGetReadme = new AbortController();
           try {
-            const req: any = await fetch(`https://raw.githubusercontent.com/${user}/${reponame}/${res.default_branch}/README.md`);
+            const req: any = await fetch(
+              `https://raw.githubusercontent.com/${user}/${reponame}/${res.default_branch}/README.md`,
+              { signal: controllerGetReadme.signal }
+            );
             if(req?.ok){
               const getMarkdown = await req.text();
               setMarkdown(getMarkdown);
@@ -67,20 +74,32 @@ export default function Detail({ params }: { params: { user: string, reponame: s
               setMarkdown(null);
               api.setError("Failed get detail");
             }
-          } catch(e) {
-            api.setError(e);
+          } catch(e: any) {
+            if(e.name !== 'AbortError'){
+              api.setError(e);
+            }
           } finally {
             setLoading(false);
           }
         }else{
           api.setError("Failed get detail");
         }
-      } catch(e) {
-        api.setError(e);
+      } catch(e: any) {
+        if(e.name !== 'AbortError'){
+          api.setError(e);
+        }
       }
     })();
 
-    /* eslint-disable-next-line */
+    return () => {
+      controllerGetDetail.abort();
+
+      if(controllerGetReadme){
+        controllerGetReadme.abort();
+      }
+    }
+
+    // eslint-disable-next-line
   }, [user, reponame]);
 
   const selectAll = (e: any) => {

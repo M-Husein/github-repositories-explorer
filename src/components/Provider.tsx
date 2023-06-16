@@ -39,7 +39,11 @@ export function Provider({ children }: {
         setSearchResult(res);
         return res;
       })
-      .catch(setError)
+      .catch((e: any) => {
+        if(e.name !== 'AbortError'){
+          setError(e);
+        }
+      })
       .finally(() => setLoading(false));
     }
     else{

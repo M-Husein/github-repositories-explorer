@@ -35,8 +35,11 @@ export function SearchResult(){
             items: list.map((val: any) => (val.id === item.id ? { ...val, detail } : val))
           });
         }
-      } catch(e) {
-        api.setError(e);
+      } catch(e: any) {
+        if(e.name !== 'AbortError'){
+          api.setError(e);
+        }
+        
         api.setSearchResult({
           ...api.searchResult,
           items: list.map((val: any) => (val.id === item.id ? { ...val, detail: null } : val))

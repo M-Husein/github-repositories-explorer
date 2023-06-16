@@ -6,7 +6,7 @@ React application which integrates with github.com API and allows user to search
 	
 ### Demo App:
 
-[Site](https://main--euphonious-conkies-2fb02b.netlify.app/)
+**[GitHub Repositories Explorer](https://github-repositories-explorer-q.netlify.app/)**
 
 ### Features:
 
@@ -14,6 +14,10 @@ React application which integrates with github.com API and allows user to search
 - User search by username.
 - User repository list.
 - Repository detail.
+
+![Home](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home.png)
+
+![Home Dark](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home_dark.png)
 
 ## Project setup
 
