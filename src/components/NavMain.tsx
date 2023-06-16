@@ -21,7 +21,7 @@ const FormNav = () => {
     setRender(false);
   }, []);
 
-  const doSearch = async (e: any) => {
+  const doSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     const req: any = await api.getUsers();
@@ -31,7 +31,7 @@ const FormNav = () => {
     }
   }
 
-  const changeInput = (e: any) => {
+  const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     api.setQuery(val);
     if(!val.length){

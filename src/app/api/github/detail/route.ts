@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import { Octokit } from "@octokit/rest";
-// import { GithubRepoResponse, GithubUsernameResponse } from "@/types/github";
+import { NextResponse } from 'next/server';
+import { Octokit } from '@octokit/rest';
+import { GithubDetailRepoResponse } from '@/types/github';
 
 export const GET = async (request: Request) => {
   try {
@@ -17,7 +17,7 @@ export const GET = async (request: Request) => {
 
     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-    const { data }: any = await octokit.request(
+    const { data }: GithubDetailRepoResponse = await octokit.request(
       'GET /repos/{owner}/{repo}',
       {
         owner: username,

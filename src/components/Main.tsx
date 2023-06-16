@@ -15,7 +15,7 @@ export const Main = ({ children }: MainProps) => {
   useEffect(() => {
     const onScroll = debounce(() => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      setShowBackTop(scrollY > 95 /* 150 */ ? true : !(scrollY < 1));
+      setShowBackTop(scrollY > 95 ? true : !(scrollY < 1));
     });
 
     document.addEventListener('scroll', onScroll);

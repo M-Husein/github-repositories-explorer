@@ -53,7 +53,7 @@ export function SearchResult(){
     }
   }
 
-  const doSearch = (e: any) => {
+  const doSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     api.getUsers();
   }

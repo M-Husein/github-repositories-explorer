@@ -13,7 +13,7 @@ export const ListRepo = ({ list }: any) => {
   const [filterResult, setFilterResult] = useState<any>([]);
   const listData = filterValue.length || filterLang !== 'all' ? filterResult : list;
 
-  const filterByRepo = (e: any) => {
+  const filterByRepo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setFilterValue(val);
     setFilterResult(
@@ -25,7 +25,7 @@ export const ListRepo = ({ list }: any) => {
     );
   }
 
-  const filterByLanguage = (e: any) => {
+  const filterByLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
     setFilterLang(val);
     setFilterResult(

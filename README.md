@@ -3,6 +3,18 @@
 
 React application which integrates with github.com API and allows user to search for up to 5 users with a username similar to the value entered in text input.
 
+	
+### Demo App:
+
+[Site](https://main--euphonious-conkies-2fb02b.netlify.app/)
+
+### Features:
+
+- Light or dark mode toggle.
+- User search by username.
+- User repository list.
+- Repository detail.
+
 ## Project setup
 
 Clone or download this repo.

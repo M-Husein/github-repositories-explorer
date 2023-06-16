@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import { Octokit } from "@octokit/rest";
-// import { GithubSearchUsersResponse } from "@/types/github";
+import { NextResponse } from 'next/server';
+import { Octokit } from '@octokit/rest';
+import { GithubSearchUsersResponse } from '@/types/github';
 
 export const POST = async (request: Request) => {
   try {
@@ -15,8 +15,7 @@ export const POST = async (request: Request) => {
 
     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-    // GithubSearchUsersResponse
-    const { data }: any = await octokit.search.users({
+    const { data }: GithubSearchUsersResponse = await octokit.search.users({
       q: username,
       per_page: 5,
     });
