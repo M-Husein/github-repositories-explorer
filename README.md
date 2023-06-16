@@ -2,7 +2,32 @@
 # GitHub repositories explorer
 
 React application which integrates with github.com API and allows user to search for up to 5 users with a username similar to the value entered in text input.
-#
+
+## Project setup
+
+Clone or download this repo.
+
+First is Important copy or rename file .env.example to .env and configuration your GitHub token.
+
+Then install dependencies:
+
+```bash
+npm install
+```
+
+For development, run the development server:
+
+```bash
+npm run dev
+```
+
+For Production:
+
+```bash
+npm run build
+```
+
+<hr />
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
