@@ -1,0 +1,43 @@
+@tailwind utilities;
+
+// This won't be included in your compiled CSS unless you actually use it
+@layer utilities {
+  :root {
+    --bs-tertiary-bg-rgb: 248,249,250;
+  }
+
+  :root[data-bs-theme=dark] {
+    --b-tertiary-bg-rgb: 43, 48, 53;
+  }
+
+  .bg-body-tertiary {
+    --b-bg-opacity: 1;
+    background-color: rgba(var(--b-tertiary-bg-rgb), var(--b-bg-opacity)); //  !important
+  }
+
+  [data-bs-theme=dark] .bg-mode {
+    color: var(--b-body-color);
+    background-color: #6c757d;
+  }
+
+  [data-bs-theme=dark] .bg-mode-2 {
+    color: var(--b-body-color);
+    background-color: #404347;
+  }
+
+  [data-bs-theme=dark] .bg-mode-hover:hover {
+    background-color: #323538;
+  }
+
+  .bg-stripe {
+    background-color: #e5e5f7;
+    opacity: .8;
+    background-size: 10px 10px;
+    background-image: repeating-linear-gradient(45deg, #bbb 0, #bbb 1px, #e5e5f7 0, #e5e5f7 50%);
+  }
+
+  [data-bs-theme=dark] .bg-stripe {
+    background-color: #333;
+    background-image: repeating-linear-gradient(45deg, #bbb 0, #bbb 1px, #333 0, #333 50%);
+  }
+}

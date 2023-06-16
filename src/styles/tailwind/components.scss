@@ -1,0 +1,29 @@
+@tailwind components;
+
+// This won't be included in your compiled CSS unless you actually use it
+@layer components {
+  .accordion-search-result {
+    > .accordion-item {
+      border-radius: 0;
+      border-top: var(--b-accordion-border-width) solid var(--b-accordion-border-color);
+
+      .accordion-button {
+        border-radius: 0 !important;
+
+        &:hover {
+          background-color: #eceef0;
+        }
+
+        [data-bs-theme=dark] &:hover {
+          background-color: #323538;
+        }
+      }
+    }
+  }
+
+  .markdown-view {
+    a {
+      text-decoration: none;
+    }
+  }
+}
