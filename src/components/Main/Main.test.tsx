@@ -8,6 +8,6 @@ describe("Main", () => {
         <h1>Title main</h1>
       </Main>
     );
-    expect(screen.getByRole('main')).toBeInTheDocument();
+    expect(screen.getByTestId('main')).toBeInTheDocument();
   });
 });

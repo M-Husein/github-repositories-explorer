@@ -4,6 +4,6 @@ import { Footer } from "./";
 describe("Footer", () => {
   it("is rendered correctly", () => {
     render(<Footer />);
-    expect(screen.getByRole('footer')).toBeInTheDocument();
+    expect(screen.getByTestId('footerMain')).toBeInTheDocument();
   });
 });

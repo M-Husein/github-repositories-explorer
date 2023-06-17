@@ -30,7 +30,10 @@ export const Main = ({ children }: MainProps) => {
   }
 
   return (
-    <main role="main" className="min-h-calc-screen--128px">
+    <main
+      data-testid="main"
+      className="min-h-calc-screen--128px"
+    >
       {children}
 
       {showBackTop && (

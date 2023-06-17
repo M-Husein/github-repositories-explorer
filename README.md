@@ -17,7 +17,7 @@ React application which integrates with github.com API and allows user to search
 
 ### App screenshots:
 
-![Home](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home.png)
+![Home](https://raw.githubusercontent.com/M-Husein/github-repositories-explorer/main/img/home.png)
 
 ![Home dark](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home_dark.png)
 
