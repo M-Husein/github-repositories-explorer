@@ -14,10 +14,7 @@ export const metadata: Metadata = {
   description: APP_DESCRIPTION,
   applicationName: APP_NAME,
   authors: [{ name: "Muhamad Husein", url: "https://www.linkedin.com/in/muhamad-husein" }],
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8f9fa' },
-    { media: '(prefers-color-scheme: dark)', color: '#2b3035' },
-  ],
+  themeColor: "#f8f9fa",
   formatDetection: {
     email: false,
     address: false,

@@ -40,6 +40,12 @@ const FormNav = () => {
     }
   }
 
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+    
+    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === "dark" ? "#f8f9fa" : "#2b3035");
+  }
+
   if(render){
     return null;
   }
@@ -61,7 +67,7 @@ const FormNav = () => {
         variant={theme}
         className="px-2 mx-1"
         title="Toggle theme"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        onClick={toggleTheme}
       >
         {theme === "dark" ? <BsFillSunFill color="yellow" /> : <BsFillMoonFill />}
       </Button>

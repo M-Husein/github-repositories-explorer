@@ -25,8 +25,8 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
   const [markdown, setMarkdown] = useState<any>('');
 
   useEffect(() => {
-    let controllerGetDetail: any = new AbortController();
-    let controllerGetReadme: any = null;
+    let controllerGetDetail: AbortController = new AbortController();
+    let controllerGetReadme: null | AbortController = null;
 
     (async () => {
       try {

@@ -1,5 +1,6 @@
 'use client';
 
+import { childrenOnly } from '@/types/common';
 import { createContext, useContext, useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
@@ -17,11 +18,7 @@ export const ApiContext = createContext({
   setError: (data: any) => {},
 });
 
-type ProviderProps = {
-  children: React.ReactNode,
-}
-
-export function Apps({ children }: ProviderProps){
+export function Apps({ children }: childrenOnly){
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>();
   const [searchResult, setSearchResult] = useState<any>({});

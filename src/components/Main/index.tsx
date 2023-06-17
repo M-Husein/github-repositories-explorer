@@ -1,15 +1,12 @@
 'use client';
 
+import { childrenOnly } from '@/types/common';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { BsChevronUp } from "react-icons/bs";
 import { debounce } from '@/utils';
 
-type MainProps = {
-  children: React.ReactNode,
-}
-
-export const Main = ({ children }: MainProps) => {
+export const Main = ({ children }: childrenOnly) => {
   const [showBackTop, setShowBackTop] = useState<boolean>(false);
 
   useEffect(() => {
