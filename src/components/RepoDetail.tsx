@@ -15,10 +15,10 @@ import { useApi } from '@/components/Provider';
 
 type RepoDetailProps = {
   user?: string
-  reponame?: string
+  repo?: string
 }
 
-export const RepoDetail = ({ user, reponame }: RepoDetailProps) => {
+export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
   const api = useApi() as any;
   const [data, setData] = useState<any>({});
   const [loading, setLoading] = useState<any>(true);
@@ -30,14 +30,14 @@ export const RepoDetail = ({ user, reponame }: RepoDetailProps) => {
 
     (async () => {
       try {
-        const res: any = await fetchApi(`/api/github/detail?username=${user}&repo=${reponame}`, { signal: controllerGetDetail.signal });
+        const res: any = await fetchApi(`/api/github/detail?username=${user}&repo=${repo}`, { signal: controllerGetDetail.signal });
         setData(res);
 
         if(res){
           controllerGetReadme = new AbortController();
           try {
             const req: any = await fetch(
-              `https://raw.githubusercontent.com/${user}/${reponame}/${res.default_branch}/README.md`,
+              `https://raw.githubusercontent.com/${user}/${repo}/${res.default_branch}/README.md`,
               { signal: controllerGetReadme.signal }
             );
             if(req?.ok){
@@ -72,7 +72,7 @@ export const RepoDetail = ({ user, reponame }: RepoDetailProps) => {
       }
     }
     // eslint-disable-next-line
-  }, [user, reponame]);
+  }, [user, repo]);
 
   const selectAll = (e: any) => {
     e.target.select()
@@ -116,7 +116,7 @@ export const RepoDetail = ({ user, reponame }: RepoDetailProps) => {
           rel="noopener noreferrer"
           className="no-underline"
         >
-          {reponame}
+          {repo}
         </a>
         <small className="inline-block align-middle py-1 px-2 rounded-xl bg-blue-100 bg-mode text-xs ml-2">
           {data.private ? 'Private' : 'Public'}
@@ -200,7 +200,7 @@ export const RepoDetail = ({ user, reponame }: RepoDetailProps) => {
             }
             <hr className="my-2" />
             <Dropdown.Item
-              href={`https://github.com/${user}/${reponame}/archive/refs/heads/${data.default_branch}.zip`}
+              href={`https://github.com/${user}/${repo}/archive/refs/heads/${data.default_branch}.zip`}
               download
             >
               <BsDownload className="mr-2" />Download ZIP
