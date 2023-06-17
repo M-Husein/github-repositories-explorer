@@ -17,9 +17,11 @@ export const ApiContext = createContext({
   setError: (data: any) => {},
 });
 
-export function Provider({ children }: {
-  children: React.ReactNode
-}) {
+type ProviderProps = {
+  children: React.ReactNode,
+}
+
+export function Provider({ children }: ProviderProps){
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>();
   const [searchResult, setSearchResult] = useState<any>({});
@@ -32,7 +34,7 @@ export function Provider({ children }: {
 
       return await fetchApi('/api/github/search', {
         method: 'POST',
-        headers: { "Content-type": "application/json; charset=UTF-8" },
+        headers: { "Content-type": "application/json" },
         body: JSON.stringify({ username: valueTrim })
       })
       .then((res) => {
@@ -71,26 +73,28 @@ export function Provider({ children }: {
       >
         {children}
 
-        <ToastContainer
-          containerPosition=""
-          position="bottom-center"
-          className="fixed mx-auto bottom-0 left-0 right-0 p-4 empty:hidden"
-        >
-          <Toast
-            className="max-md:w-screen bg-red-500 text-white"
-            autohide={false}
-            show={!!error}
-            onClose={() => setError(null)}
+        {!!error && (
+          <ToastContainer
+            containerPosition=""
+            position="bottom-center"
+            className="fixed mx-auto bottom-0 left-0 right-0 p-4"
           >
-            <Toast.Header
-              closeVariant="white"
-              className="bg-red-500 text-white"
+            <Toast
+              show
+              autohide
+              onClose={() => setError(null)}
+              className="max-md:w-screen bg-red-500 text-white"
             >
-              <strong className="mr-auto">Info</strong>
-            </Toast.Header>
-            <Toast.Body>{error?.message || error}</Toast.Body>
-          </Toast>
-        </ToastContainer>
+              <Toast.Header
+                closeVariant="white"
+                className="bg-red-500 text-white"
+              >
+                <strong className="mr-auto">Info</strong>
+              </Toast.Header>
+              <Toast.Body>{error?.message || error}</Toast.Body>
+            </Toast>
+          </ToastContainer>
+        )}
       </ApiContext.Provider>
     </ThemeProvider>
   );

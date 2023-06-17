@@ -7,11 +7,18 @@ import Card from 'react-bootstrap/Card';
 import { BsFillStarFill, BsSearch } from "react-icons/bs";
 import { numShort } from '@/utils';
 
-export const ListRepo = ({ list }: any) => {
+type ListRepoProps = {
+  id: number | string
+  list?: any
+}
+
+export const ListRepo = ({ id, list }: ListRepoProps) => {
   const [filterValue, setFilterValue] = useState<string>('');
   const [filterLang, setFilterLang] = useState<string>('all');
   const [filterResult, setFilterResult] = useState<any>([]);
   const listData = filterValue.length || filterLang !== 'all' ? filterResult : list;
+  // @ts-ignore
+  const parseLanguages = [...new Set(list.map((repo: any) => repo.language || "unknown"))];
 
   const filterByRepo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -41,15 +48,15 @@ export const ListRepo = ({ list }: any) => {
     return (
       <>
         <div className="sticky top-108px z-20 pt-4 bg-body-tertiary">
-          <h6>Repositories ({list.length})</h6>
+          <h6>Repositories ({ list.length })</h6>
           <div className="row g-2">
             <div className="col-sm-9">
               <div className="input-group">
-                <label className="input-group-text" htmlFor={"inputSearchRepo" + list.id}>
+                <label className="input-group-text" htmlFor={"iFindRepo" + id}>
                   <BsSearch />
                 </label>
                 <FormControl
-                  id={"inputSearchRepo" + list.id}
+                  id={"iFindRepo" + id}
                   type="search"
                   placeholder="Search repository"
                   value={filterValue}
@@ -64,8 +71,7 @@ export const ListRepo = ({ list }: any) => {
                 onChange={filterByLanguage}
               >
                 <option value="all">All</option>
-                {/* @ts-ignore */}
-                {[...new Set(list.map((repo: any) => repo.language || "unknown"))].map((lang: string) =>
+                {parseLanguages.map((lang: string) =>
                   <option key={lang} value={lang}>{lang}</option>
                 )}
               </select>
@@ -89,7 +95,7 @@ export const ListRepo = ({ list }: any) => {
                     <div className="grow font-bold">{repo.name}</div>
                     <small className="flex-none">
                       {repo.stargazers_count ? numShort(repo.stargazers_count) : 0}
-                      <BsFillStarFill className="ml-1 align-[-2px]" />
+                      <BsFillStarFill className="ml-1 align--2px" />
                     </small>
                   </h5>
 

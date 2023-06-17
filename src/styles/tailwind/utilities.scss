@@ -40,4 +40,8 @@
     background-color: #333;
     background-image: repeating-linear-gradient(45deg, #bbb 0, #bbb 1px, #333 0, #333 50%);
   }
+
+  .align--2px {
+    vertical-align: -2px;
+  }
 }

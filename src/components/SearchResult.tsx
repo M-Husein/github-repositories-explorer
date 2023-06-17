@@ -21,6 +21,8 @@ export function SearchResult(){
     const dataId = +e.target.parentElement.getAttribute('data-id');
     const item = list.find((f: any) => dataId === f.id);
 
+    e.target.blur();
+
     if(eventKey.includes(dataId) && item){
       setLoadingGetRepos(item.id);
       
@@ -64,8 +66,8 @@ export function SearchResult(){
   if(!!list.length){
     return (
       <div className="w-full max-w-5xl mx-auto py-4 lg:px-4">
-        <p className="text-gray-500 font-semibold max-md:px-4">
-          Showing users for &quot;{api.query}&quot;
+        <p className="text-gray-500 max-md:px-4">
+          Showing users for <strong>"{api.query}"</strong>
         </p>
         <Accordion
           alwaysOpen
@@ -167,7 +169,10 @@ export function SearchResult(){
                         </div>
 
                         <div className="col-md-8 bg-body-tertiary">
-                          <ListRepo list={item?.detail?.repos} />
+                          <ListRepo
+                            id={item.id}
+                            list={item?.detail?.repos}
+                          />
                         </div>
                       </div>
                       :
@@ -192,10 +197,10 @@ export function SearchResult(){
           >
             <FormControl
               type="search"
-              placeholder="Search username"
+              placeholder="Search by username"
               disabled={api.loading}
               value={api.query}
-              onChange={(e: any) => api.setQuery(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => api.setQuery(e.target.value)}
             />
             <Button type="submit" variant="light">
               {api.loading ? <Spinner animation="border" size="sm" /> : <BsSearch />}
@@ -203,8 +208,9 @@ export function SearchResult(){
           </form>
         </div>
 
-        <div className="col-md-3">
+        <div className="col-md-3 p-6 text-center">
           <BsGithub className="w-full h-full" />
+          <h1 className="h4 mt-2">GitHub repositories explorer</h1>
         </div>
       </div>
     </div>

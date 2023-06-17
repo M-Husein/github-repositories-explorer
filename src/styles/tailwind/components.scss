@@ -21,6 +21,11 @@
     }
   }
 
+  // For equate btn-outline border color with input field
+  .input-group .btn:not(:hover) {
+    border-color: var(--b-border-color);
+  }
+
   .markdown-view {
     a {
       text-decoration: none;

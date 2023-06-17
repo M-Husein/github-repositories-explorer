@@ -9,6 +9,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useTheme } from 'next-themes';
 import { BsSearch, BsGithub, BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 import { useApi } from '@/components/Provider';
+import { APP_NAME } from '@/const/APPS';
 
 const FormNav = () => {
   const [render, setRender] = useState(true);
@@ -72,7 +73,7 @@ const FormNav = () => {
       >
         <FormControl
           type="search"
-          placeholder="Search username"
+          placeholder="Search by username"
           disabled={api.loading}
           value={api.query}
           onChange={changeInput}
@@ -93,7 +94,7 @@ const FormNav = () => {
 export const NavMain = () => (
   <nav className="navbar navbar-expand-lg bg-body-tertiary shadow sticky top-0 z-1040 h-14">
     <div className="container-xxl w-full max-w-5xl mx-auto px-4">
-      <Link href="/" className="navbar-brand font-semibold">
+      <Link href="/" className="navbar-brand font-semibold" title={APP_NAME}>
         GRE
       </Link>
 

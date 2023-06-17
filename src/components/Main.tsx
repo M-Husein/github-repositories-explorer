@@ -7,7 +7,7 @@ import { debounce } from '@/utils';
 
 type MainProps = {
   children: React.ReactNode,
-};
+}
 
 export const Main = ({ children }: MainProps) => {
   const [showBackTop, setShowBackTop] = useState<boolean>(false);

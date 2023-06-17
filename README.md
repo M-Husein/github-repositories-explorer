@@ -2,20 +2,20 @@
 # GitHub repositories explorer
 
 React application which integrates with github.com API and allows user to search for up to 5 users with a username similar to the value entered in text input.
-
 	
 ### Demo App:
 
-**[GitHub Repositories Explorer](https://github-repositories-explorer-q.netlify.app/)**
+**[GitHub repositories explorer](https://github-repositories-explorer-q.netlify.app/)**
 
 ### Features:
 
-- Light or dark mode toggle.
 - Search user by username.
 - User repository list.
 - Repository details.
+- Responsive design.
+- Toggle light or dark color scheme.
 
-### App screenshots
+### App screenshots:
 
 ![Home](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home.png)
 
@@ -31,7 +31,7 @@ Clone or download this repo.
 
 First is Important copy or rename file **.env.example** to **.env** and configuration your GitHub access token.
 Follow this link to create and get GitHub access token.
-[GitHub access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+**[GitHub access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)**
 
 Then install dependencies:
 
