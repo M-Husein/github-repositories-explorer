@@ -31,8 +31,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: APP_URL + "/img/gre.png",
-        width: 1917, // 800,
-        height: 927, // 600,
+        width: 1917,
+        height: 927,
       }
     ],
     locale: "en",

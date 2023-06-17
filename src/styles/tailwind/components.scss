@@ -31,4 +31,10 @@
       text-decoration: none;
     }
   }
+
+  .codeView:not(:hover) {
+    > .btn {
+      display: none;
+    }
+  }
 }
