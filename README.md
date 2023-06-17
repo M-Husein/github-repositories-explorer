@@ -19,11 +19,11 @@ React application which integrates with github.com API and allows user to search
 
 ![Home](https://raw.githubusercontent.com/M-Husein/github-repositories-explorer/main/img/home.png)
 
-![Home dark](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/home_dark.png)
+![Home dark](https://raw.githubusercontent.com/M-Husein/github-repositories-explorer/main/img/home_dark.png)
 
-![Search result](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/search_result.png)
+![Search result](https://raw.githubusercontent.com/M-Husein/github-repositories-explorer/main/img/search_result.png)
 
-![Search result dark](https://github.com/M-Husein/github-repositories-explorer/blob/main/img/search_result_dark.png)
+![Search result dark](https://raw.githubusercontent.com/M-Husein/github-repositories-explorer/main/img/search_result_dark.png)
 
 ## Project setup
 
