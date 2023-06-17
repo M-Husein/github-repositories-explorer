@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTheme } from 'next-themes';
 import { BsSearch, BsGithub, BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
-import { useApi } from '@/components/Provider';
+import { useApi } from '@/components/Apps';
 import { APP_NAME } from '@/const/APPS';
 
 const FormNav = () => {

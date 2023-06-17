@@ -21,7 +21,7 @@ type ProviderProps = {
   children: React.ReactNode,
 }
 
-export function Provider({ children }: ProviderProps){
+export function Apps({ children }: ProviderProps){
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>();
   const [searchResult, setSearchResult] = useState<any>({});

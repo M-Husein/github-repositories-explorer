@@ -42,7 +42,7 @@ export const CodeView = ({
         size="sm"
         variant={theme}
         title={copyMessage}
-        className="absolute top-2 right-2 z-1"
+        className="absolute top-1 right-1 z-1"
         tabIndex={-1}
         onClick={copyToClipboard}
       >
@@ -53,7 +53,7 @@ export const CodeView = ({
         language={language}
         PreTag="div"
         style={theme === 'dark' ? materialDark : materialLight}
-        showLineNumbers
+        showLineNumbers={language !== 'bash'}
         {...etc}
       >
         {/* eslint-disable-next-line */}

@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import { type ImgHTMLAttributes, useState } from 'react';
 import Image from 'next/image';
 import { cx } from '@/utils';

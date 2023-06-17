@@ -8,7 +8,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import { BsPeople, BsGeoAlt, BsLink45Deg, BsTwitter, BsSearch, BsGithub, BsEnvelope } from "react-icons/bs";
 import { Img } from '@/components/Img';
 import { ListRepo } from '@/components/ListRepo';
-import { useApi } from '@/components/Provider';
+import { useApi } from '@/components/Apps';
 import { fetchApi, numShort } from '@/utils';
 
 export function SearchResult(){

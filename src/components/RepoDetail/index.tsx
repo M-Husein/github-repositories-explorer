@@ -11,7 +11,7 @@ import { BsEye, BsStarFill, BsLink45Deg, BsDownload } from "react-icons/bs";
 import { Img } from '@/components/Img';
 import { CodeView } from '@/components/CodeView';
 import { fetchApi, numShort, parseDate } from '@/utils';
-import { useApi } from '@/components/Provider';
+import { useApi } from '@/components/Apps';
 
 type RepoDetailProps = {
   user?: string

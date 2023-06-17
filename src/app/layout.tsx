@@ -1,6 +1,6 @@
 import '../styles/globals.scss';
 import type { Metadata } from 'next';
-import { Provider } from '@/components/Provider';
+import { Apps } from '@/components/Apps';
 import { NavMain } from '@/components/NavMain';
 import { Main } from '@/components/Main';
 import { Footer } from '@/components/Footer';
@@ -54,11 +54,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased min-h-screen">
-        <Provider>
+        <Apps>
           <NavMain />
           <Main>{children}</Main>
           <Footer />
-        </Provider>
+        </Apps>
       </body>
     </html>
   )
