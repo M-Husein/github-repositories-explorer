@@ -67,7 +67,7 @@ export function SearchResult(){
     return (
       <div className="w-full max-w-5xl mx-auto py-4 lg:px-4">
         <p className="text-gray-500 max-md:px-4">
-          Showing users for <strong>"{api.query}"</strong>
+          Showing users for <strong>&quot;{api.query}&quot;</strong>
         </p>
         <Accordion
           alwaysOpen
