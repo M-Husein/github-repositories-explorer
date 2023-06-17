@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { RepoDetail } from '@/components/RepoDetail';
+// import { RepoDetail } from '@/components/RepoDetail';
 import { APP_NAME } from '@/const/APPS';
 
 type metaProps = {
@@ -24,7 +24,7 @@ export async function generateMetadata(
 export default function Detail({ params }: metaProps){
   return (
     <div className="w-full max-w-5xl mx-auto p-4 flex flex-col">
-      <RepoDetail {...params} />
+      {/* <RepoDetail {...params} /> */}
     </div>
   );
 }
