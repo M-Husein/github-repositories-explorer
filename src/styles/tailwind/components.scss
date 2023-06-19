@@ -9,6 +9,10 @@
 
       .accordion-button {
         border-radius: 0 !important;
+        // white-space: nowrap;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // max-width: 100%;
 
         &:hover {
           background-color: #eceef0;

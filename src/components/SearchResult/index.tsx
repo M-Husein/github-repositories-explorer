@@ -84,15 +84,17 @@ export function SearchResult(){
                 className="sticky top-14 z-30"
                 data-id={item.id}
               >
-                <Img
-                  width={25}
-                  height={25}
-                  draggable={false}
-                  alt={item.login}
-                  src={item.avatar_url}
-                  className="mr-2 rounded"
-                />
-                {item.login}
+                <span className="inline-block truncate" title={item.login}>
+                  <Img
+                    width={25}
+                    height={25}
+                    draggable={false}
+                    alt={item.login}
+                    src={item.avatar_url}
+                    className="mr-2 rounded"
+                  />
+                  {item.login}
+                </span>
               </Accordion.Header>
               <Accordion.Body className="flex flex-col pt-0">
                 {
