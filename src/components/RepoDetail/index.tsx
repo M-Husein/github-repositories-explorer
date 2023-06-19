@@ -5,11 +5,9 @@ import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 import Dropdown from 'react-bootstrap/Dropdown';
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
 import { BsEye, BsStarFill, BsLink45Deg, BsDownload } from "react-icons/bs";
 import { Img } from '@/components/Img';
-import { CodeView } from '@/components/CodeView';
+import { MarkdownView } from '@/components/MarkdownView';
 import { fetchApi, numShort, parseDate } from '@/utils';
 import { useApi } from '@/components/Apps';
 
@@ -235,31 +233,10 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
         </p>
       )}
       
-      {markdown && (
-        <div className="markdown-view my-5">
-          <ReactMarkdown
-            rehypePlugins={[rehypeRaw]}
-            components={{
-              code({ node, inline, className, children, ...props }){
-                const match = /language-(\w+)/.exec(className || '')
-                return !inline && match ? (
-                  <CodeView
-                    language={match[1]}
-                    {...props}
-                  >
-                    {children}
-                  </CodeView>
-                ) : (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                )
-              }
-            }}
-          >
-            {markdown}
-          </ReactMarkdown>
-        </div>
+      {!!markdown && (
+        <MarkdownView className="my-5">
+          {markdown}
+        </MarkdownView>
       )}
     </>
 }

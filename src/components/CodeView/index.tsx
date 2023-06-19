@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { PrismAsync } from 'react-syntax-highlighter'; // Prism
-import { materialLight, materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { PrismAsync } from 'react-syntax-highlighter'; // OPTION: Prism
+import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'; // OPTION theme: materialLight, materialDark
 import Button from 'react-bootstrap/Button';
 import { BsClipboard, BsCheck2 } from 'react-icons/bs';
 
@@ -27,7 +27,7 @@ export const CodeView = ({
         setCopyMessage(true);
         setTimeout(() => {
           setCopyMessage(false);
-        }, 500);
+        }, 3e3);
       } catch(e) {
         // console.log('e: ', e);
       }
@@ -55,7 +55,7 @@ export const CodeView = ({
       <PrismAsync
         language={language}
         PreTag="div"
-        style={theme === 'dark' ? materialDark : materialLight}
+        style={theme === 'dark' ? oneDark : oneLight}
         showLineNumbers={language !== 'bash'}
         {...etc}
       >
