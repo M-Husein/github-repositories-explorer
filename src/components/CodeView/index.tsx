@@ -14,21 +14,23 @@ export const CodeView = ({
 }: any) => {
   const { theme } = useTheme();
   const [noRender, setNoRender] = useState<boolean>(true);
-  const [copyMessage, setCopyMessage] = useState<string>('Copy');
+  const [copyMessage, setCopyMessage] = useState<boolean>(false);
 
   useEffect(() => {
     setNoRender(false);
   }, []);
 
   const copyToClipboard = async () => {
-    try {
-      await navigator?.clipboard?.writeText?.(Array.isArray(children) ? children.join('') : children);
-      setCopyMessage('Copied');
-      setTimeout(() => {
-        setCopyMessage('Copy');
-      }, 500);
-    } catch(e) {
-      // console.log('e: ', e);
+    if(!copyMessage){
+      try {
+        await navigator?.clipboard?.writeText?.(Array.isArray(children) ? children.join('') : children);
+        setCopyMessage(true);
+        setTimeout(() => {
+          setCopyMessage(false);
+        }, 500);
+      } catch(e) {
+        // console.log('e: ', e);
+      }
     }
   }
 
@@ -41,12 +43,13 @@ export const CodeView = ({
       <Button
         size="sm"
         variant={theme}
-        title={copyMessage}
         className="absolute top-1 right-1 z-1"
         tabIndex={-1}
+        aria-label="Copy to clipboard"
+        disabled={copyMessage}
         onClick={copyToClipboard}
       >
-        {copyMessage === 'Copy' ? <BsClipboard /> : <BsCheck2 />}
+        {copyMessage ? <BsCheck2 /> : <BsClipboard />}
       </Button>
 
       <PrismAsync

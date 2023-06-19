@@ -99,46 +99,57 @@ export function SearchResult(){
                   loadingGetRepos === item.id ? 
                     <Spinner animation="border" className="text-blue-600 mx-auto mt-4" />
                     :
-                    !!item?.detail?.repos?.length ? 
+                    item?.detail?.profile || !!item?.detail?.repos?.length ? 
                       <div className="row">
                         <div className="col-md-4">
-                          {item?.detail?.profile && (
+                          {!!item?.detail?.profile && (
                             <div className="lg:sticky top-108px pt-4">
-                              <p className="text-center">
-                                <Img
-                                  width={155}
-                                  height={155}
-                                  draggable={false}
-                                  alt={item.login}
-                                  src={item.detail.profile.avatar_url}
-                                  className="rounded"
-                                />
-                              </p>
+                              {!!item.detail.profile.avatar_url && (
+                                <p className="text-center">
+                                  <Img
+                                    width={155}
+                                    height={155}
+                                    draggable={false}
+                                    alt={item.login}
+                                    src={item.detail.profile.avatar_url}
+                                    className="rounded"
+                                  />
+                                </p>
+                              )}
 
-                              <h5>
-                                <a href={item.html_url} target="_blank" rel="noopener noreferrer" className="no-underline">{item?.detail?.profile?.name}</a>
-                              </h5>
+                              {!!item.detail.profile.name && (
+                                <h5>
+                                  <a href={item.html_url} target="_blank" rel="noopener noreferrer" className="no-underline">
+                                    {item.detail.profile.name}
+                                  </a>
+                                </h5>
+                              )}
+
                               <h6>
-                                <a href={item.html_url} target="_blank" rel="noopener noreferrer" className="no-underline">@{item.login}</a>
+                                <a href={item.html_url} target="_blank" rel="noopener noreferrer" className="no-underline">
+                                  @{item.login}
+                                </a>
                               </h6>
-                              <hr />
-                              {item.detail.profile?.bio && <p>{item.detail.profile.bio}</p>}
 
-                              {item.detail.profile?.followers && (
+                              <hr />
+                              
+                              {!!item.detail.profile.bio && <p>{item.detail.profile.bio}</p>}
+
+                              {typeof item.detail.profile.followers == 'number' && (
                                 <p>
                                   <BsPeople className="mr-2" />
                                   {numShort(item.detail.profile.followers)} followers · {numShort(item.detail.profile.following)} following
                                 </p>
                               )}
 
-                              {item.detail.profile?.location && (
+                              {!!item.detail.profile.location && (
                                 <p>
                                   <BsGeoAlt className="mr-2" />
                                   {item.detail.profile.location}
                                 </p>
                               )}
 
-                              {item.detail.profile?.email && (
+                              {!!item.detail.profile.email && (
                                 <p>
                                   <a href={"mailto:" + item.detail.profile.email} className="no-underline">
                                     <BsEnvelope className="mr-2" />
@@ -147,7 +158,7 @@ export function SearchResult(){
                                 </p>
                               )}
                               
-                              {item.detail.profile?.blog && (
+                              {!!item.detail.profile.blog && (
                                 <p>
                                   <a href={item.detail.profile.blog} target="_blank" rel="noopener noreferrer" className="no-underline">
                                     <BsLink45Deg className="mr-2" />
@@ -156,7 +167,7 @@ export function SearchResult(){
                                 </p>
                               )}
 
-                              {item.detail.profile?.twitter_username && (
+                              {!!item.detail.profile.twitter_username && (
                                 <p>
                                   <a href={"https://twitter.com/" + item.detail.profile.twitter_username} target="_blank" rel="noopener noreferrer" className="no-underline">
                                     <BsTwitter className="mr-2" />
@@ -171,7 +182,7 @@ export function SearchResult(){
                         <div className="col-md-8 bg-body-tertiary">
                           <ListRepo
                             id={item.id}
-                            list={item?.detail?.repos}
+                            list={item?.detail?.repos || []}
                           />
                         </div>
                       </div>

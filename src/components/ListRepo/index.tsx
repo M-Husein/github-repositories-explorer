@@ -44,73 +44,72 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
     );
   }
 
-  if(list?.length){
-    return (
-      <>
-        <div className="sticky top-108px z-20 pt-4 bg-body-tertiary">
-          <h6>Repositories ({ list.length })</h6>
-          <div className="row g-2">
-            <div className="col-sm-9">
-              <div className="input-group">
-                <label className="input-group-text" htmlFor={"iFindRepo" + id}>
-                  <BsSearch />
-                </label>
-                <FormControl
-                  id={"iFindRepo" + id}
-                  type="search"
-                  placeholder="Search repository"
-                  value={filterValue}
-                  onChange={filterByRepo}
-                />
-              </div>
-            </div>
-            <div className="col-sm-3">
-              <select
-                className="form-select capitalize"
-                value={filterLang}
-                onChange={filterByLanguage}
-              >
-                <option value="all">All</option>
-                {parseLanguages.map((lang: string) =>
-                  <option key={lang} value={lang}>{lang}</option>
-                )}
-              </select>
+  return (
+    <>
+      <div className="sticky top-108px z-20 pt-4 bg-body-tertiary">
+        <h6>Repositories ({ list.length })</h6>
+        <fieldset disabled={!list.length} className="row g-2">
+          <div className="col-sm-9">
+            <div className="input-group">
+              <label className="input-group-text" htmlFor={"iFindRepo" + id}>
+                <BsSearch />
+              </label>
+              <FormControl
+                id={"iFindRepo" + id}
+                type="search"
+                placeholder="Search repository"
+                disabled={!list.length}
+                value={filterValue}
+                onChange={filterByRepo}
+              />
             </div>
           </div>
-          <hr />
-        </div>
+          <div className="col-sm-3">
+            <select
+              className="form-select capitalize"
+              disabled={!list.length}
+              value={filterLang}
+              onChange={filterByLanguage}
+            >
+              <option value="all">All</option>
+              {parseLanguages.map((lang: string) =>
+                <option key={lang} value={lang}>{lang}</option>
+              )}
+            </select>
+          </div>
+        </fieldset>
+        <hr />
+      </div>
 
-        <div className="flex flex-col gap-y-4">
-          {listData.length ?
-            listData.map((repo: any) =>
-              <Card
-                key={repo.id}
-                as={Link}
-                prefetch={false}
-                // `/repo/${repo.owner.login}/${repo.name}`
-                href={`/repo?user=${repo.owner.login}&repo=${repo.name}`}
-                className="bg-gray-100 hover:bg-gray-200 bg-mode-2 bg-mode-hover shadow-sm no-underline text-gray-600"
-              >
-                <Card.Body>
-                  <h5 className="flex flex-row flex-wrap">
-                    <div className="grow font-bold">{repo.name}</div>
-                    <small className="flex-none">
-                      {repo.stargazers_count ? numShort(repo.stargazers_count) : 0}
-                      <BsFillStarFill className="ml-1 align--2px" />
-                    </small>
-                  </h5>
+      <div className="flex flex-col gap-y-4">
+        {listData.length ?
+          listData.map((repo: any) =>
+            <Card
+              key={repo.id}
+              as={Link}
+              prefetch={false}
+              href={`/repo?user=${repo.owner.login}&repo=${repo.name}`} // `/repo/${repo.owner.login}/${repo.name}`
+              className="bg-gray-100 hover:bg-gray-200 bg-mode-2 bg-mode-hover shadow-sm no-underline text-gray-600"
+            >
+              <Card.Body>
+                <h5 className="flex flex-row flex-wrap">
+                  <div className="grow font-bold">{repo.name}</div>
+                  <small className="flex-none">
+                    {repo.stargazers_count ? numShort(repo.stargazers_count) : 0}
+                    <BsFillStarFill className="ml-1 align--2px" />
+                  </small>
+                </h5>
 
-                  {repo.description && <Card.Text>{repo.description}</Card.Text>}
-                </Card.Body>
-              </Card>
-            )
-            :
-            <div className="py-4 text-center font-semibold">Not Found</div>
-          }
-        </div>
-      </>
-    )
-  }
-
-  return null;
+                {repo.description && <Card.Text>{repo.description}</Card.Text>}
+              </Card.Body>
+            </Card>
+          )
+          :
+          <div className="py-4 text-center font-semibold">
+            {list.length ? 'Not Found' : 'This user has no repositories'}
+          </div>
+        }
+      </div>
+    </>
+  );
 }
