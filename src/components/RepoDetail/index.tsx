@@ -92,7 +92,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
     <Spinner animation="border" className="text-blue-600 mx-auto my-4" />
     :
     <>
-      <h1 className="text-3xl">
+      <h1 className="text-3xl break-all">
         <a
           href={data.owner.html_url}
           target="_blank"
@@ -214,7 +214,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
       {data.description && <p className="lead">{data.description}</p>}
 
       {data.homepage && (
-        <a href={data.homepage} target="_blank" rel="noopener noreferrer" className="no-underline font-semibold">
+        <a href={data.homepage} target="_blank" rel="noopener noreferrer" className="no-underline font-semibold break-all">
           <BsLink45Deg /> {data.homepage}
         </a>
       )}
