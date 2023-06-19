@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import FormControl from 'react-bootstrap/FormControl';
+import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
 import { BsFillStarFill, BsSearch } from "react-icons/bs";
-import { numShort } from '@/utils';
+import { numShort, debounce } from '@/utils';
 
 type ListRepoProps = {
   id: number | string
@@ -16,20 +17,35 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
   const [filterValue, setFilterValue] = useState<string>('');
   const [filterLang, setFilterLang] = useState<string>('all');
   const [filterResult, setFilterResult] = useState<any>([]);
-  const listData = filterValue.length || filterLang !== 'all' ? filterResult : list;
-  // @ts-ignore
+  const [loadingFilter, setLoadingFilter] = useState<boolean>(false);
+  const listData = filterValue.length || filterLang !== 'all' ? filterResult : list; // @ts-ignore
   const parseLanguages = [...new Set(list.map((repo: any) => repo.language || "unknown"))];
+
+  // eslint-disable-next-line
+  const debouncedFilter = useCallback(debounce((val: string) => {
+    setFilterResult(
+      list.filter((item: any) => 
+        item.name.includes(val.toLowerCase())
+        &&
+        (filterLang === 'all' || item.language === (filterLang === 'unknown' ? null : filterLang))
+      )
+    );
+
+    setLoadingFilter(false); // End loading
+  }, 500), []);
 
   const filterByRepo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setFilterValue(val);
-    setFilterResult(
-      list.filter((item: any) => 
-        item.name.includes(val.toLowerCase()) 
-        && 
-        (filterLang === 'all' || item.language === (filterLang === 'unknown' ? null : filterLang))
-      )
-    );
+    if(val){
+      setLoadingFilter(true); // Begin loading
+      debouncedFilter(val);
+      return;
+    }
+    // Reset filter result
+    if(filterResult.length){
+      setFilterResult(list);
+    }
   }
 
   const filterByLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -38,7 +54,7 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
     setFilterResult(
       list.filter((item: any) => 
         (val === 'all' || item.language === (val === 'unknown' ? null : val)) 
-        && 
+        &&
         item.name.includes(filterValue.toLowerCase())
       )
     );
@@ -53,7 +69,7 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
             <div className="col-sm-9">
               <div className="input-group">
                 <label className="input-group-text" htmlFor={"iFindRepo" + id}>
-                  <BsSearch />
+                  {loadingFilter ? <Spinner size="sm" animation="border" /> : <BsSearch />}
                 </label>
                 <FormControl
                   id={"iFindRepo" + id}
@@ -105,9 +121,11 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
             </Card>
           )
           :
-          <div className="py-4 text-center font-semibold">
-            {list.length ? 'Not Found' : 'This user has no repositories'}
-          </div>
+          !loadingFilter && (
+            <div className="py-4 text-center font-semibold">
+              {list.length ? 'Not Found' : 'This user has no repositories'}
+            </div>
+          )
         }
       </div>
     </>
