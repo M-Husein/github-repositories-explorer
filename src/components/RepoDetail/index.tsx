@@ -173,7 +173,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
           <Dropdown.Toggle variant="outline-secondary" className="w-full" id="ddCode">
             Code
           </Dropdown.Toggle>
-          <Dropdown.Menu className="shadow w-full lg:min-w-[400px]">
+          <Dropdown.Menu className="shadow w-full lg:min-w-400px">
             <Dropdown.Header>Clone</Dropdown.Header>
             {
               [

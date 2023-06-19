@@ -19,6 +19,9 @@ module.exports = {
       width: {
         'calc-screen--175px': 'calc(100vw - 175px)',
       },
+      minWidth: {
+        '400px': '400px',
+      },
       minHeight: {
         'calc-screen--128px': 'calc(100vh - 128px)',
       },
