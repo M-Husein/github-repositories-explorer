@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -13,8 +14,16 @@ export const MarkdownView = ({
   iframeClass,
   linkClass,
   paragraphClass,
-  tableClass
+  tableClass,
+  onMounted
 }: any) => {
+  
+  useEffect(() => {
+    if(typeof onMounted === 'function'){
+      onMounted();
+    }
+  }, [onMounted]);
+
   const a = ({ node, className, ...props }: any) => {
     const isExternal = props.href !== window.location.origin;
     return (

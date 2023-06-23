@@ -10,7 +10,7 @@ import { cx } from '@/utils';
 
 type SpeechContentProps = {
   className?: string
-  text?: string
+  text?: string | any
   dropdownProps?: any
 }
 
@@ -21,13 +21,14 @@ export const SpeechContent = ({
 }: SpeechContentProps) => {
   const { theme } = useTheme();
   const utteranceRef = useRef() as any;
-  const [voice, setVoice] = useState('0');
+  const [voice, setVoice] = useState<string>('0');
   const [rateValue, setRateValue] = useState<number>(1);
-  const [pitchValue, setPitchValue] = useState(1);
-  const [volumeValue, setVolumeValue] = useState(1);
-  const [isSpeak, setIsSpeak] = useState(!1);
+  const [pitchValue, setPitchValue] = useState<number>(1);
+  const [volumeValue, setVolumeValue] = useState<number>(1);
+  const [isSpeak, setIsSpeak] = useState<boolean>(false);
+  const [isPause, setIsPause] = useState<boolean>(false);
 
-  const speechSyn: any = typeof window !== 'undefined' && window.speechSynthesis;
+  let speechSyn: any = typeof window !== 'undefined' && window.speechSynthesis;
   const SpeechUtterance: any = typeof window !== 'undefined' && window.SpeechSynthesisUtterance;
   const [supported, setSupported] = useState(false);
   
@@ -38,16 +39,17 @@ export const SpeechContent = ({
   useEffect(() => {
     const endSpeak = () => {
       setIsSpeak(false);
-      // console.log(`Utterance has finished being spoken after ${e.elapsedTime} seconds.`);
+      setIsPause(false);
     }
 
     const errorSpeak = (e: any) => {
       if(e.error !== 'interrupted'){
         setIsSpeak(false);
+        setIsPause(false);
       }
-      // console.log('speech synthesis error: ' + e.error); // 'An error has occurred with the speech synthesis: ' + e.error
     }
 
+    // Stop speech when reload page or close tab
     const beforeUnload = () => {
       speechSyn.cancel(); // Stop
     }
@@ -64,14 +66,25 @@ export const SpeechContent = ({
       window.removeEventListener("beforeunload", beforeUnload, { capture: true });
     }
     // eslint-disable-next-line
-  }, [utteranceRef.current]);
+  }, [utteranceRef.current, speechSyn]);
+
+  // Stop speech when unmounted
+  useEffect(() => {
+    return () => {
+      if(utteranceRef.current){
+        stopSpeak();
+      }
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const voices = speechSyn.getVoices().map((item: any, i: number) => Object.assign(item, { value: '' + i }) );
 
   const voiceOptions = voices
     .map(({ value, name, lang }: any) => ({ value, name, lang }) )
     .sort((a: any, b: any) => {
-      const aname = a.name.toUpperCase(), bname = b.name.toUpperCase();
+      const aname = a.name.toUpperCase();
+      const bname = b.name.toUpperCase();
       if ( aname < bname ) return -1;
       else if ( aname == bname ) return 0;
       else return +1;
@@ -82,6 +95,7 @@ export const SpeechContent = ({
       if(speechSyn.speaking && !speechSyn.paused){
         speechSyn.pause(); // pause narration
         setIsSpeak(false);
+        setIsPause(true);
         return;
       }
 
@@ -89,15 +103,16 @@ export const SpeechContent = ({
 
       if(speechSyn.paused){
         speechSyn.resume(); // unpause/resume narration
+        setIsPause(false);
         return;
       }
 
       utteranceRef.current = new SpeechUtterance(text);
 
-      utteranceRef.current.voice = voices[value || voice];
       utteranceRef.current.rate = rateValue;
       utteranceRef.current.pitch = pitchValue;
       utteranceRef.current.volume = volumeValue;
+      utteranceRef.current.voice = voices[value || voice];
 
       speechSynthesis.speak(utteranceRef.current);
     }
@@ -107,6 +122,7 @@ export const SpeechContent = ({
     if(speechSyn.speaking){
       speechSyn.cancel(); // stop narration
       setIsSpeak(false);
+      setIsPause(false);
     }
   }
 
@@ -193,12 +209,12 @@ export const SpeechContent = ({
 
       <Dropdown {...dropdownProps}>
         <Dropdown.Toggle
-          disabled={isSpeak}
+          disabled={isSpeak || isPause}
           variant={theme}
           bsPrefix=" "
           title="Speech volume"
         >
-          {volumeValue < 1 ? <BsVolumeMuteFill /> : <BsVolumeUpFill />}
+          {volumeValue === 0 ? <BsVolumeMuteFill /> : <BsVolumeUpFill />}
         </Dropdown.Toggle>
         <Dropdown.Menu className="min-w-0 w-full shadow-md">
           <div className="flex flex-col items-center">
