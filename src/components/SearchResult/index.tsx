@@ -3,11 +3,10 @@
 import { useRef, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Spinner from 'react-bootstrap/Spinner';
-import Button from 'react-bootstrap/Button';
-import FormControl from 'react-bootstrap/FormControl';
-import { BsPeople, BsGeoAlt, BsLink45Deg, BsTwitter, BsSearch, BsGithub, BsEnvelope } from "react-icons/bs";
+import { BsPeople, BsGeoAlt, BsLink45Deg, BsTwitter, BsGithub, BsEnvelope } from 'react-icons/bs';
 import { Img } from '@/components/Img';
 import { ListRepo } from '@/components/ListRepo';
+import { FormSearch } from '@/components/FormSearch';
 import { useApi } from '@/components/Apps';
 import { fetchApi, numShort } from '@/utils';
 
@@ -203,22 +202,13 @@ export function SearchResult(){
     <div className="min-h-calc-screen--128px flex justify-center items-center bg-stripe">
       <div className="row items-center gap-y-4 w-full p-4 max-w-5xl mx-auto">
         <div className="col-md-9">
-          <form
-            className="input-group input-group-lg"
-            role="search"
+          <FormSearch
+            size="lg"
+            loading={api.loading}
+            value={api.query}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => api.setQuery(e.target.value)}
             onSubmit={doSearch}
-          >
-            <FormControl
-              type="search"
-              placeholder="Search by username"
-              disabled={api.loading}
-              value={api.query}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => api.setQuery(e.target.value)}
-            />
-            <Button type="submit" variant="light">
-              {api.loading ? <Spinner animation="border" size="sm" /> : <BsSearch />}
-            </Button>
-          </form>
+          />
         </div>
 
         <div className="col-md-3 p-6 text-center">

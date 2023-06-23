@@ -58,4 +58,10 @@
     transform-origin: left;
     position: absolute;
   }
+
+  .search-navmain:focus-within {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+  }
 }

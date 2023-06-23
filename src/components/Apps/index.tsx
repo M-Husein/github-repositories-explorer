@@ -24,8 +24,8 @@ export function Apps({ children }: childrenOnly){
   const [searchResult, setSearchResult] = useState<any>({});
   const [query, setQuery] = useState<string>('');
 
-  const getUsers = async () => {
-    const valueTrim = query.trim();
+  const getUsers = async (val?: any) => {
+    const valueTrim = (val || query).trim();
     if(valueTrim.length){
       setLoading(true);
 
@@ -43,7 +43,10 @@ export function Apps({ children }: childrenOnly){
           setError(e);
         }
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        setQuery(val || query);
+      });
     }
     else{
       setSearchResult({});

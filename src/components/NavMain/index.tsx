@@ -3,20 +3,19 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
 import { useTheme } from 'next-themes';
-import { BsSearch, BsGithub, BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
+import { BsGithub, BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
+import { FormSearch } from '@/components/FormSearch';
 import { useApi } from '@/components/Apps';
 import { APP_NAME } from '@/const/APPS';
 
 const FormNav = () => {
-  const [render, setRender] = useState(true);
-  const { theme, setTheme } = useTheme();
   const router = useRouter();
   const pathname = usePathname();
   const api = useApi() as any;
+  const { theme, setTheme } = useTheme();
+  const [render, setRender] = useState(true);
 
   useEffect(() => {
     setRender(false);
@@ -72,27 +71,13 @@ const FormNav = () => {
         {theme === "dark" ? <BsFillSunFill color="yellow" /> : <BsFillMoonFill />}
       </Button>
 
-      <form
-        className="input-group max-md:w-calc-screen--175px"
-        role="search"
+      <FormSearch
+        className="max-md:w-calc-screen--175px max-md:search-navmain"
+        loading={api.loading}
+        value={api.query}
+        onChange={changeInput}
         onSubmit={doSearch}
-      >
-        <FormControl
-          type="search"
-          placeholder="Search by username"
-          disabled={api.loading}
-          value={api.query}
-          onChange={changeInput}
-        />
-        <Button
-          type="submit"
-          className="px-2"
-          variant={`outline-${theme === 'dark' ? 'light' : 'secondary'}`}
-          disabled={api.loading}
-        >
-          {api.loading ? <Spinner animation="border" size="sm" /> : <BsSearch />}
-        </Button>
-      </form>
+      />
     </div>
   );
 }
