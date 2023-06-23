@@ -14,6 +14,7 @@ React application which integrates with github.com API and allows user to search
 - Repository details.
 - Responsive design.
 - Toggle light or dark color scheme.
+- Speech content in repository detail page using **[Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)**
 
 ### App screenshots:
 
