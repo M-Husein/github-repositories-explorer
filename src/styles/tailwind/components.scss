@@ -41,4 +41,21 @@
       display: none;
     }
   }
+
+  .range-v {
+    width: 2rem;
+    height: 175px;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .range-v .form-range {
+    width: 175px;
+    height: 16px;
+    left: 0;
+    bottom: -0.75em;
+    transform: rotate(-90deg) translateY(calc(2rem / 2));
+    transform-origin: left;
+    position: absolute;
+  }
 }
