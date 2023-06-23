@@ -223,9 +223,9 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
 
         <hr />
 
-        {data.description && <p className="lead">{data.description}</p>}
+        {!!data.description && <p className="lead">{data.description}</p>}
 
-        {data.homepage && (
+        {!!data.homepage && (
           <a href={data.homepage} target="_blank" rel="noopener noreferrer" className="no-underline font-semibold break-all">
             <BsLink45Deg /> {data.homepage}
           </a>

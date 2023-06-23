@@ -32,7 +32,7 @@ export const SpeechContent = ({
   const [supported, setSupported] = useState(false);
   
   useEffect(() => {
-    setSupported(!!speechSyn && !!SpeechUtterance);
+    setSupported(!!speechSyn && !!SpeechUtterance); // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export const SpeechContent = ({
       if(e.error !== 'interrupted'){
         setIsSpeak(false);
       }
-      console.log('speech synthesis error: ' + e.error); // 'An error has occurred with the speech synthesis: ' + e.error
+      // console.log('speech synthesis error: ' + e.error); // 'An error has occurred with the speech synthesis: ' + e.error
     }
 
     const beforeUnload = () => {
@@ -63,6 +63,7 @@ export const SpeechContent = ({
       utteranceRef.current?.removeEventListener?.("end", endSpeak);
       window.removeEventListener("beforeunload", beforeUnload, { capture: true });
     }
+    // eslint-disable-next-line
   }, [utteranceRef.current]);
 
   const voices = speechSyn.getVoices().map((item: any, i: number) => Object.assign(item, { value: '' + i }) );
