@@ -151,7 +151,7 @@ export const SpeechContent = ({
         value={voice}
         onChange={changeVoice}
       >
-        {voiceOptions.map(([key, options]: any) =>
+        {voiceOptions.map(([key, options]: [string, any]) =>
           <optgroup key={key} label={key}>
             {options.map((item: any) =>
               <option key={item.value} value={item.value}>{item.name}</option>
