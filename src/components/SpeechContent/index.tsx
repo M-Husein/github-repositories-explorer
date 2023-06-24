@@ -80,15 +80,20 @@ export const SpeechContent = ({
 
   const voices = speechSyn.getVoices().map((item: any, i: number) => Object.assign(item, { value: '' + i }) );
 
-  const voiceOptions = voices
-    .map(({ value, name, lang }: any) => ({ value, name, lang }) )
-    .sort((a: any, b: any) => {
-      const aname = a.name.toUpperCase();
-      const bname = b.name.toUpperCase();
-      if ( aname < bname ) return -1;
-      else if ( aname == bname ) return 0;
-      else return +1;
-    });
+  const voiceOptions = Object.entries(
+    voices.reduce((acc: any, obj: any) => {
+      const key = obj.lang;
+      const curGroup = acc[key] ?? [];
+      return { ...acc, [key]: [...curGroup, obj] };
+    }, {})
+  )
+  .sort((a: any, b: any) => {
+    const aname = a[0].toUpperCase();
+    const bname = b[0].toUpperCase();
+    if (aname < bname) return -1;
+    else if (aname == bname) return 0;
+    else return +1;
+  });
 
   const toggleSpeak = (value?: any) => {
     if(text && window.SpeechSynthesisUtterance){
@@ -146,8 +151,12 @@ export const SpeechContent = ({
         value={voice}
         onChange={changeVoice}
       >
-        {voiceOptions.map((item: any) =>
-          <option key={item.value} value={item.value}>{item.name} ({item.lang})</option>
+        {voiceOptions.map(([key, options]: any) =>
+          <optgroup key={key} label={key}>
+            {options.map((item: any) =>
+              <option key={item.value} value={item.value}>{item.name}</option>
+            )}
+          </optgroup>
         )}
       </FormSelect>
 

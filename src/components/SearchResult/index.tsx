@@ -9,6 +9,7 @@ import { ListRepo } from '@/components/ListRepo';
 import { FormSearch } from '@/components/FormSearch';
 import { useApi } from '@/components/Apps';
 import { fetchApi, numShort } from '@/utils';
+import { APP_NAME } from '@/const/APPS';
 import logo from '@/assets/img/logo-512x512.png';
 
 export function SearchResult(){
@@ -235,7 +236,9 @@ export function SearchResult(){
             src={logo}
           />
           <h1 className="h4 mt-2">
-            <span className="box-decoration-clone leading-5 px-2 pb-1 rounded bg-gray-300 bg-mode-2">GitHub repositories explorer</span>
+            <span className="box-decoration-clone leading-5 px-2 pb-1 rounded bg-gray-300 bg-mode-2">
+              {APP_NAME}
+            </span>
           </h1>
         </div>
       </div>
