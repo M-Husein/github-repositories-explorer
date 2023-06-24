@@ -25,9 +25,13 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
   const [mountMarkdown, setMountMarkdown] = useState<any>(false);
   const [markdown, setMarkdown] = useState<any>('');
 
+  console.log('user: ', user);
+  console.log('repo: ', repo);
+
   useEffect(() => {
-    console.log('user: ', user);
-    console.log('repo: ', repo);
+    console.log('useEffect user: ', user);
+    console.log('useEffect repo: ', repo);
+    
     let controllerGetDetail: null | AbortController = null;
     let controllerGetReadme: null | AbortController = null;
 
@@ -84,7 +88,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
       }
     }
     // eslint-disable-next-line
-  }, []); // user, repo
+  }, [user, repo]);
 
   const selectAll = (e: any) => {
     e.target.select()
