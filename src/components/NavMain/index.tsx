@@ -5,9 +5,11 @@ import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import { useTheme } from 'next-themes';
 import { BsGithub, BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
+import { Img } from '@/components/Img';
 import { FormSearch } from '@/components/FormSearch';
 import { useApi } from '@/components/Apps';
 import { APP_NAME } from '@/const/APPS';
+import logo from '@/assets/img/logo-96x96.png';
 
 const FormNav = () => {
   const api = useApi() as any;
@@ -79,7 +81,14 @@ export const NavMain = () => (
   <nav className="navbar navbar-expand-lg bg-body-tertiary shadow sticky top-0 z-1040 h-14">
     <div className="container-xxl w-full max-w-5xl mx-auto px-4">
       <Link href="/" className="navbar-brand font-semibold" title={APP_NAME}>
-        GRE
+        <Img
+          priority
+          width={30}
+          height={30}
+          className="inline-block align-top rounded-full"
+          alt="GRE"
+          src={logo}
+        />
       </Link>
 
       <FormNav />

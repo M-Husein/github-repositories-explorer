@@ -232,6 +232,7 @@ export function SearchResult(){
             priority
             width={210}
             height={210}
+            className="rounded-full"
             alt="GRE"
             src={logo}
           />
