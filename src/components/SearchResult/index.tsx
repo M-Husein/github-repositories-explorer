@@ -235,7 +235,7 @@ export function SearchResult(){
             src={logo}
           />
           <h1 className="h4 mt-2">
-            <span className="box-decoration-clone leading-5 px-2 pb-1 rounded bg-gray-300 bg-mode">GitHub repositories explorer</span>
+            <span className="box-decoration-clone leading-5 px-2 pb-1 rounded bg-gray-300 bg-mode-2">GitHub repositories explorer</span>
           </h1>
         </div>
       </div>
