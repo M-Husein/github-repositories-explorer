@@ -5,7 +5,7 @@ import { GithubDetailRepoResponse } from '@/types/github';
 export const GET = async (request: Request) => {
   try {
     const { searchParams } = new URL(request.url);
-    const username = searchParams.get("username");
+    const username = searchParams.get("user") || "";
     const repo = searchParams.get("repo") || "";
 
     if(!username || !repo){

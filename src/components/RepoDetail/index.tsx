@@ -31,7 +31,9 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
 
     (async () => {
       try {
-        const res: any = await fetchApi(`/api/github/detail?username=${user}&repo=${repo}`, { signal: controllerGetDetail.signal });
+        // console.log('user: ', user);
+        // console.log('repo: ', repo);
+        const res: any = await fetchApi(`/api/github/detail?user=${user}&repo=${repo}`, { signal: controllerGetDetail.signal });
         
         if(res){
           setData(res);
