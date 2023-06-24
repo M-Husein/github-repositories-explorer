@@ -5,10 +5,12 @@ import Image from 'next/image';
 import { cx } from '@/utils';
 
 interface ImgProps extends ImgHTMLAttributes<HTMLImageElement> {
+  src?: any
   width?: number
   height?: number
   draggable?: boolean
   fill?: boolean
+  priority?: boolean
   onLoadingComplete?: () => void
 }
 
@@ -19,6 +21,7 @@ export const Img = ({
   height,
   draggable,
   fill,
+  priority,
   className,
   onLoadingComplete
 }: ImgProps) => {
@@ -37,6 +40,7 @@ export const Img = ({
       height={height}
       draggable={draggable}
       fill={fill}
+      priority={priority}
       className={cx(isLoading && "bg-gray-200", className)}
       onLoadingComplete={loadingComplete}
     />

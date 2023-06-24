@@ -154,10 +154,10 @@ export const SpeechContent = ({
       <Dropdown {...dropdownProps}>
         <Dropdown.Toggle
           variant={theme}
-          bsPrefix=" "
+          bsPrefix="border-0"
           title="Speech rate"
         >
-          <BsSpeedometer />
+          <BsSpeedometer className="align--2px" />
         </Dropdown.Toggle>
         <Dropdown.Menu className="min-w-0 w-full shadow-md">
           <div className="flex flex-col items-center">
@@ -182,10 +182,10 @@ export const SpeechContent = ({
       <Dropdown {...dropdownProps}>
         <Dropdown.Toggle
           variant={theme}
-          bsPrefix=" "
+          bsPrefix="border-0"
           title="Speech pitch"
         >
-          <BsMusicNoteBeamed />
+          <BsMusicNoteBeamed className="align--2px" />
         </Dropdown.Toggle>
         <Dropdown.Menu className="min-w-0 w-full shadow-md">
           <div className="flex flex-col items-center">
@@ -211,10 +211,10 @@ export const SpeechContent = ({
         <Dropdown.Toggle
           disabled={isSpeak || isPause}
           variant={theme}
-          bsPrefix=" "
+          bsPrefix="border-0"
           title="Speech volume"
         >
-          {volumeValue === 0 ? <BsVolumeMuteFill /> : <BsVolumeUpFill />}
+          {volumeValue === 0 ? <BsVolumeMuteFill className="align--2px scale-125" /> : <BsVolumeUpFill className="align--2px scale-125" />}
         </Dropdown.Toggle>
         <Dropdown.Menu className="min-w-0 w-full shadow-md">
           <div className="flex flex-col items-center">
@@ -238,19 +238,21 @@ export const SpeechContent = ({
 
       <Button
         variant={theme}
+        className="border-0"
         title={isSpeak ? 'Pause' : 'Speak'}
         onClick={() => toggleSpeak()}
       >
-        {isSpeak ? <BsPauseFill /> : <BsMegaphone />}
+        {isSpeak ? <BsPauseFill className="align--2px" /> : <BsMegaphone className="align--2px" />}
       </Button>
       
       <Button
         variant={theme}
+        className="border-0"
         title="Stop speak"
         disabled={!isSpeak}
         onClick={stopSpeak}
       >
-        <BsStopFill />
+        <BsStopFill className="align--2px" />
       </Button>
     </div>
   )

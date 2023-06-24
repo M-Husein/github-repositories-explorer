@@ -3,12 +3,13 @@
 import { useRef, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Spinner from 'react-bootstrap/Spinner';
-import { BsPeople, BsGeoAlt, BsLink45Deg, BsTwitter, BsGithub, BsEnvelope } from 'react-icons/bs';
+import { BsPeople, BsGeoAlt, BsLink45Deg, BsTwitter, BsEnvelope } from 'react-icons/bs';
 import { Img } from '@/components/Img';
 import { ListRepo } from '@/components/ListRepo';
 import { FormSearch } from '@/components/FormSearch';
 import { useApi } from '@/components/Apps';
 import { fetchApi, numShort } from '@/utils';
+import logo from '@/assets/img/logo-512x512.png';
 
 export function SearchResult(){
   const api = useApi() as any;
@@ -54,6 +55,14 @@ export function SearchResult(){
         refController.current = null;
         setLoadingGetRepos(null);
       }
+    }
+  }
+
+  const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    api.setQuery(val);
+    if(!val.length){
+      api.setSearchResult({});
     }
   }
 
@@ -201,19 +210,33 @@ export function SearchResult(){
   return (
     <div className="min-h-calc-screen--128px flex justify-center items-center bg-stripe">
       <div className="row items-center gap-y-4 w-full p-4 max-w-5xl mx-auto">
-        <div className="col-md-9">
+        <div className="col-md-9 max-md:p-0">
           <FormSearch
             size="lg"
             loading={api.loading}
             value={api.query}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => api.setQuery(e.target.value)}
+            onChange={changeInput}
             onSubmit={doSearch}
           />
+
+          {!api.loading && !!api.query.length && api.searchResult?.total_count === 0 && (
+            <div className="invalid-tooltip inline-block relative">
+              The user you are looking for does not exist
+            </div>
+          )}
         </div>
 
         <div className="col-md-3 p-6 text-center">
-          <BsGithub className="w-full h-full" />
-          <h1 className="h4 mt-2">GitHub repositories explorer</h1>
+          <Img
+            priority
+            width={210}
+            height={210}
+            alt="GRE"
+            src={logo}
+          />
+          <h1 className="h4 mt-2">
+            <span className="box-decoration-clone leading-5 px-2 pb-1 rounded bg-gray-300 bg-mode">GitHub repositories explorer</span>
+          </h1>
         </div>
       </div>
     </div>

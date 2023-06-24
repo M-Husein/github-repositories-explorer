@@ -57,10 +57,10 @@ export const FormSearch = ({
           return;
         }
 
-        setQuery(transcript);
-        getUsers(transcript);
         recognition.current.stop();
         setIsEnabled(false);
+        setQuery(transcript);
+        getUsers(transcript);
       });
     }
 
@@ -78,6 +78,14 @@ export const FormSearch = ({
   const toggleSpeak = () => {
     setIsEnabled(!isEnabled);
     inputRef.current.focus();
+  }
+
+  const clickSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if(!value?.length){
+      e.preventDefault();
+      e.stopPropagation();
+      inputRef.current.focus();
+    }
   }
 
   if(noRender){
@@ -107,22 +115,32 @@ export const FormSearch = ({
       />
       
       {speechRecognition && (
-        <Button
-          variant={isEnabled ? 'danger' : theme}
-          className={cx("px-2 relative", isEnabled && "overflow-hidden transition-none")}
-          title={isEnabled ? 'Stop' : 'Search by voice'}
-          onClick={toggleSpeak}
-        >
-          <BsMicFill className="relative z-1 align--2px" />
-          {isEnabled && <span className="animate-ping absolute inset-0 inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />}
-        </Button>
+        <div className="relative flex">
+          <Button
+            variant={theme}
+            className={cx("rounded-none px-2 relative", isEnabled && "overflow-hidden transition-none")}
+            title={isEnabled ? 'Stop' : 'Search by voice'}
+            disabled={loading}
+            onClick={toggleSpeak}
+          >
+            <BsMicFill className="relative z-1 align--2px" />
+            {isEnabled && <span className="animate-ping absolute inset-0 inline-flex h-full w-full rounded-full bg-red-500" />}
+          </Button>
+          
+          {isEnabled && (
+            <div className="invalid-tooltip block min-w-max right-0">
+              Speech now
+            </div>
+          )}
+        </div>
       )}
       
       <Button
         variant={theme}
         type="submit"
-        className="px-2"
+        className="px-2 btn-search"
         disabled={loading}
+        onClick={clickSubmit}
       >
         {loading ? <Spinner animation="border" size="sm" /> : <BsSearch className="align--2px" />}
       </Button>

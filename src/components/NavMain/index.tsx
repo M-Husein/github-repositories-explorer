@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import { useTheme } from 'next-themes';
@@ -11,8 +10,6 @@ import { useApi } from '@/components/Apps';
 import { APP_NAME } from '@/const/APPS';
 
 const FormNav = () => {
-  const router = useRouter();
-  const pathname = usePathname();
   const api = useApi() as any;
   const { theme, setTheme } = useTheme();
   const [render, setRender] = useState(true);
@@ -21,14 +18,10 @@ const FormNav = () => {
     setRender(false);
   }, []);
 
-  const doSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+  const doSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    const req: any = await api.getUsers();
-    
-    if(req && pathname !== '/'){
-      router.push('/');
-    }
+    api.getUsers();
   }
 
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,21 +47,21 @@ const FormNav = () => {
       <Button
         as="a"
         variant={theme}
-        className="px-2"
+        className="px-2 border-0"
         href="https://github.com/M-Husein/github-repositories-explorer"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <BsGithub size={19} />
+        <BsGithub className="align--2px scale-125" />
       </Button>
 
       <Button
         variant={theme}
-        className="px-2 mx-1"
+        className="px-2 border-0 mx-1"
         title="Toggle theme"
         onClick={toggleTheme}
       >
-        {theme === "dark" ? <BsFillSunFill color="yellow" /> : <BsFillMoonFill />}
+        {theme === "dark" ? <BsFillSunFill className="align--2px" color="yellow" /> : <BsFillMoonFill className="align--2px" />}
       </Button>
 
       <FormSearch

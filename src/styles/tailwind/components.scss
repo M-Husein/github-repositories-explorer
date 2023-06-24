@@ -63,5 +63,16 @@
     position: absolute;
     inset: 0;
     width: 100% !important;
+    z-index: 1;
+
+    > .form-control {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    > .btn-search {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
 }

@@ -2,6 +2,7 @@
 
 import { childrenOnly } from '@/types/common';
 import { createContext, useContext, useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { ThemeProvider } from 'next-themes';
@@ -19,24 +20,28 @@ export const ApiContext = createContext({
 });
 
 export function Apps({ children }: childrenOnly){
+  const router = useRouter();
+  const pathname = usePathname();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>();
   const [searchResult, setSearchResult] = useState<any>({});
   const [query, setQuery] = useState<string>('');
 
-  const getUsers = async (val?: any) => {
+  const getUsers = (val?: any) => {
     const valueTrim = (val || query).trim();
     if(valueTrim.length){
       setLoading(true);
 
-      return await fetchApi('/api/github/search', {
+      fetchApi('/api/github/search', {
         method: 'POST',
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ username: valueTrim })
       })
       .then((res) => {
         setSearchResult(res);
-        return res;
+        if(res && pathname !== '/'){
+          router.push('/');
+        }
       })
       .catch((e: any) => {
         if(e.name !== 'AbortError'){
@@ -62,9 +67,9 @@ export function Apps({ children }: childrenOnly){
       <ApiContext.Provider
         value={{
           loading,
-          searchResult,
           query,
           error,
+          searchResult,
           getUsers,
           setQuery,
           setSearchResult,
