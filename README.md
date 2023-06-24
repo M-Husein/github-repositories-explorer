@@ -1,4 +1,4 @@
-![GRE](https://raw.githubusercontent.com/M-Husein/github-repositories-explorer/main/img/logo-512x512.png)
+![GRE](https://raw.githubusercontent.com/M-Husein/github-repositories-explorer/main/img/logo-96x96.png)
 
 # GitHub repositories explorer
 
