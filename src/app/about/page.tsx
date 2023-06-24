@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function About(){
   return (
     <div className="w-full max-w-5xl mx-auto p-4 flex flex-col">
-      <h1>About {APP_NAME}</h1>
+      <h1 className="h3 text-center">About {APP_NAME}</h1>
     </div>
   );
 }

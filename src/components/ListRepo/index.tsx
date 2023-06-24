@@ -104,7 +104,7 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
               key={repo.id}
               as={Link}
               prefetch={false}
-              href={`/repo?user=${repo.owner.login}&repo=${repo.name}`} // `/repo/${repo.owner.login}/${repo.name}`
+              href={`/detail-repo?user=${repo.owner.login}&repo=${repo.name}`} // `/repo/${repo.owner.login}/${repo.name}`
               className="bg-gray-100 hover:bg-gray-200 bg-mode-2 bg-mode-hover shadow-sm no-underline text-gray-600"
             >
               <Card.Body>

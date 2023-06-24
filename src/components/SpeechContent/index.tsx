@@ -33,7 +33,8 @@ export const SpeechContent = ({
   const [supported, setSupported] = useState(false);
   
   useEffect(() => {
-    setSupported(!!speechSyn && !!SpeechUtterance); // eslint-disable-next-line
+    setSupported(!!speechSyn && !!SpeechUtterance);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -117,7 +118,7 @@ export const SpeechContent = ({
       utteranceRef.current.rate = rateValue;
       utteranceRef.current.pitch = pitchValue;
       utteranceRef.current.volume = volumeValue;
-      utteranceRef.current.voice = voices[value || voice];
+      utteranceRef.current.voice = voices[+(value || voice)];
 
       speechSynthesis.speak(utteranceRef.current);
     }
@@ -154,7 +155,10 @@ export const SpeechContent = ({
         {voiceOptions.map(([key, options]: [string, any]) =>
           <optgroup key={key} label={key}>
             {options.map((item: any) =>
-              <option key={item.value} value={item.value}>{item.name}</option>
+              <option key={item.value} value={item.value}>
+                {item.name}
+                {item.default ? ' -- DEFAULT' : ''}
+              </option>
             )}
           </optgroup>
         )}

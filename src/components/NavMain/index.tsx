@@ -83,16 +83,6 @@ const FormNav = () => {
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      {/* <Button
-        as="a"
-        variant={theme}
-        className="px-2 border-0"
-        href="https://github.com/M-Husein/github-repositories-explorer"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <BsGithub className="align--2px scale-125" />
-      </Button> */}
 
       <Button
         variant={theme}
