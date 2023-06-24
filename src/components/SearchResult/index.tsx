@@ -209,7 +209,7 @@ export function SearchResult(){
   }
   
   return (
-    <div className="min-h-calc-screen--128px flex justify-center items-center bg-stripe">
+    <div className="min-h-calc-screen--128px flex justify-center items-center bg-main">
       <div className="row items-center gap-y-4 w-full p-4 max-w-5xl mx-auto">
         <div className="col-md-9 max-md:p-0">
           <FormSearch
