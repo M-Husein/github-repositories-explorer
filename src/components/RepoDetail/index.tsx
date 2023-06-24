@@ -29,10 +29,9 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
     let controllerGetDetail: null | AbortController = null;
     let controllerGetReadme: null | AbortController = null;
 
-    if(user && repo){
-      controllerGetDetail = new AbortController();
-
-      (async () => {
+    (async () => {
+      if(user && repo){
+        controllerGetDetail = new AbortController();
         try {
           console.log('user: ', user);
           console.log('repo: ', repo);
@@ -70,8 +69,8 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
             api.setError(e);
           }
         }
-      })();
-    }
+      }
+    })();
 
     return () => {
       if(controllerGetDetail){
@@ -83,7 +82,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
       }
     }
     // eslint-disable-next-line
-  }, [user, repo]);
+  }, []); // user, repo
 
   const selectAll = (e: any) => {
     e.target.select()
