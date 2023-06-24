@@ -26,7 +26,7 @@ export const FormSearch = ({
   onChange,
   onSubmit,
 }: FormSearchProps) => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const { setQuery, getUsers } = useApi() as any;
   const recognition = useRef(null) as any;
   const inputRef = useRef() as any;
@@ -117,7 +117,7 @@ export const FormSearch = ({
       {speechRecognition && (
         <div className="relative flex">
           <Button
-            variant={theme}
+            variant={resolvedTheme}
             className={cx("rounded-none px-2 relative", isEnabled && "overflow-hidden transition-none")}
             title={isEnabled ? 'Stop' : 'Search by voice'}
             disabled={loading}
@@ -136,7 +136,7 @@ export const FormSearch = ({
       )}
       
       <Button
-        variant={theme}
+        variant={resolvedTheme}
         type="submit"
         className="px-2 btn-search"
         disabled={loading}

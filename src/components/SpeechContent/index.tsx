@@ -19,7 +19,7 @@ export const SpeechContent = ({
   text,
   dropdownProps,
 }: SpeechContentProps) => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const utteranceRef = useRef() as any;
   const [voice, setVoice] = useState<string>('0');
   const [rateValue, setRateValue] = useState<number>(1);
@@ -162,7 +162,7 @@ export const SpeechContent = ({
 
       <Dropdown {...dropdownProps}>
         <Dropdown.Toggle
-          variant={theme}
+          variant={resolvedTheme}
           bsPrefix="border-0"
           title="Speech rate"
         >
@@ -190,7 +190,7 @@ export const SpeechContent = ({
 
       <Dropdown {...dropdownProps}>
         <Dropdown.Toggle
-          variant={theme}
+          variant={resolvedTheme}
           bsPrefix="border-0"
           title="Speech pitch"
         >
@@ -219,7 +219,7 @@ export const SpeechContent = ({
       <Dropdown {...dropdownProps}>
         <Dropdown.Toggle
           disabled={isSpeak || isPause}
-          variant={theme}
+          variant={resolvedTheme}
           bsPrefix="border-0"
           title="Speech volume"
         >
@@ -246,7 +246,7 @@ export const SpeechContent = ({
       </Dropdown>
 
       <Button
-        variant={theme}
+        variant={resolvedTheme}
         className="border-0"
         title={isSpeak ? 'Pause' : 'Speak'}
         onClick={() => toggleSpeak()}
@@ -255,7 +255,7 @@ export const SpeechContent = ({
       </Button>
       
       <Button
-        variant={theme}
+        variant={resolvedTheme}
         className="border-0"
         title="Stop speak"
         disabled={!isSpeak}

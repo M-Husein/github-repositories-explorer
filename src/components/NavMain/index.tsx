@@ -13,16 +13,24 @@ import logo from '@/assets/img/logo-96x96.png';
 
 const FormNav = () => {
   const api = useApi() as any;
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme: theme, setTheme } = useTheme();
   const [render, setRender] = useState(true);
 
   useEffect(() => {
     setRender(false);
   }, []);
 
+  useEffect(() => {
+    if(typeof window !== 'undefined'){
+      // Toggle meta theme-color
+      if(theme && theme !== "system"){
+        document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === "dark" ? "#2b3035" : "#f8f9fa");
+      }
+    }
+  }, [theme]);
+
   const doSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
     api.getUsers();
   }
 
@@ -36,8 +44,6 @@ const FormNav = () => {
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
-    
-    document.querySelector('meta[name=theme-color]')?.setAttribute('content', theme === "dark" ? "#f8f9fa" : "#2b3035");
   }
 
   if(render){

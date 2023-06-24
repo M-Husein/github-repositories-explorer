@@ -8,13 +8,13 @@ import { APP_NAME, APP_DESCRIPTION, APP_URL } from '@/const/APPS';
 
 export const metadata: Metadata = {
   title: {
-    template:  `%s | ${APP_NAME}`,
+    template: `%s | ${APP_NAME}`,
     default: APP_NAME,
   },
   description: APP_DESCRIPTION,
   applicationName: APP_NAME,
   authors: [{ name: "Muhamad Husein", url: "https://www.linkedin.com/in/muhamad-husein" }],
-  themeColor: "#f8f9fa",
+  themeColor: "#f8f9fa", // light theme
   formatDetection: {
     email: false,
     address: false,

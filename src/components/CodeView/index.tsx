@@ -12,7 +12,7 @@ export const CodeView = ({
   children,
   ...etc
 }: any) => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [noRender, setNoRender] = useState<boolean>(true);
   const [copyMessage, setCopyMessage] = useState<boolean>(false);
 
@@ -42,7 +42,7 @@ export const CodeView = ({
     <div className="relative codeView">
       <Button
         size="sm"
-        variant={theme}
+        variant={resolvedTheme}
         className="absolute top-1 right-1 z-1"
         tabIndex={-1}
         aria-label="Copy to clipboard"
@@ -55,7 +55,7 @@ export const CodeView = ({
       <PrismAsync
         language={language}
         PreTag="div"
-        style={theme === 'dark' ? oneDark : oneLight}
+        style={resolvedTheme === 'dark' ? oneDark : oneLight}
         showLineNumbers={language !== 'bash'}
         {...etc}
       >
