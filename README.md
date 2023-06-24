@@ -1,4 +1,5 @@
-	
+![GRE](https://raw.githubusercontent.com/M-Husein/github-repositories-explorer/main/img/logo-512x512.png)
+
 # GitHub repositories explorer
 
 React application which integrates with github.com API and allows user to search for up to 5 users with a username similar to the value entered in text input.
