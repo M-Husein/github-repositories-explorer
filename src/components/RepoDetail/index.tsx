@@ -26,6 +26,8 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
   const [markdown, setMarkdown] = useState<any>('');
 
   useEffect(() => {
+    console.log('user: ', user);
+    console.log('repo: ', repo);
     let controllerGetDetail: null | AbortController = null;
     let controllerGetReadme: null | AbortController = null;
 
@@ -33,8 +35,6 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
       if(user && repo){
         controllerGetDetail = new AbortController();
         try {
-          console.log('user: ', user);
-          console.log('repo: ', repo);
           const res: any = await fetchApi(`/api/github/detail?user=${user}&repo=${repo}`, { signal: controllerGetDetail.signal });
           
           if(res){
@@ -69,6 +69,8 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
             api.setError(e);
           }
         }
+      } else {
+        setLoading(false);
       }
     })();
 
