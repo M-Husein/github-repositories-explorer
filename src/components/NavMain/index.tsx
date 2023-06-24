@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { useTheme } from 'next-themes';
-import { BsGithub, BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
+import { BsGithub, BsFillSunFill, BsFillMoonFill, BsThreeDotsVertical, BsLinkedin } from "react-icons/bs";
 import { Img } from '@/components/Img';
 import { FormSearch } from '@/components/FormSearch';
 import { useApi } from '@/components/Apps';
@@ -52,7 +53,37 @@ const FormNav = () => {
 
   return (
     <div className="flex flex-row items-center">
-      <Button
+      <Dropdown
+        drop="down"
+        align={{ sm: "end" }}
+      >
+        <Dropdown.Toggle variant={theme} bsPrefix="px-2 border-0" id="menuMore">
+          <BsThreeDotsVertical className="align--2px" />
+        </Dropdown.Toggle>
+        <Dropdown.Menu className="min-w-0 shadow">
+          <Link href="/about" className="no-underline">
+            <Dropdown.Item as="span">
+              About
+            </Dropdown.Item>
+          </Link>
+          <hr className="my-2" />
+          <Dropdown.Item
+            href="https://github.com/M-Husein/github-repositories-explorer"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsGithub className="align--2px scale-125 mr-2" />Repository
+          </Dropdown.Item>
+          <Dropdown.Item
+            href="https://www.linkedin.com/in/muhamad-husein"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsLinkedin className="align--2px mr-2" />Linkedin
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      {/* <Button
         as="a"
         variant={theme}
         className="px-2 border-0"
@@ -61,7 +92,7 @@ const FormNav = () => {
         rel="noopener noreferrer"
       >
         <BsGithub className="align--2px scale-125" />
-      </Button>
+      </Button> */}
 
       <Button
         variant={theme}

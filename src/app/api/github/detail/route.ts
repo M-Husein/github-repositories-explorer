@@ -8,9 +8,9 @@ export const GET = async (request: Request) => {
     const username = searchParams.get("username");
     const repo = searchParams.get("repo") || "";
 
-    if(!username){
+    if(!username || !repo){
       return NextResponse.json(
-        { error: "Username is required" },
+        { error: "Username and repository name is required" },
         { status: 400 }
       );
     }

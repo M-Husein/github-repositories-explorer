@@ -19,7 +19,7 @@ export const Img = ({
   alt,
   width,
   height,
-  draggable,
+  draggable = false,
   fill,
   priority,
   className,
@@ -38,7 +38,7 @@ export const Img = ({
       alt={alt || ""}
       width={width}
       height={height}
-      draggable={draggable}
+      draggable={!draggable ? false : undefined}
       fill={fill}
       priority={priority}
       className={cx(isLoading && "bg-gray-200", className)}
