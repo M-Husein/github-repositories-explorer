@@ -1,5 +1,6 @@
 import '../styles/globals.scss';
 import type { Metadata } from 'next';
+import { childrenOnly } from '@/types/common';
 import { Apps } from '@/components/Apps';
 import { NavMain } from '@/components/NavMain';
 import { Main } from '@/components/Main';
@@ -43,11 +44,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: childrenOnly){
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased min-h-screen">

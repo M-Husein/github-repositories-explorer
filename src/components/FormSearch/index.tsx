@@ -75,15 +75,19 @@ export const FormSearch = ({
     }
   }, [isEnabled, setQuery, getUsers]);
 
-  const toggleSpeak = () => {
+  const toggleSpeak = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if(isEnabled){
+      (e.target as any).blur();
+    }
     setIsEnabled(!isEnabled);
-    inputRef.current.focus();
   }
 
   const clickSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     if(!value?.length){
       e.preventDefault();
       e.stopPropagation();
+
+      (e.target as any).blur();
       inputRef.current.focus();
     }
   }
@@ -123,8 +127,8 @@ export const FormSearch = ({
             disabled={loading}
             onClick={toggleSpeak}
           >
-            <BsMicFill className="relative z-1 align--2px" />
-            {isEnabled && <span className="animate-ping absolute inset-0 inline-flex h-full w-full rounded-full bg-red-500" />}
+            <BsMicFill className="relative z-1 align--2px pointer-events-none" />
+            {isEnabled && <span className="animate-ping absolute inset-0 inline-flex h-full w-full rounded-full bg-red-500 pointer-events-none" />}
           </Button>
           
           {isEnabled && (

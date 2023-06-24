@@ -73,7 +73,7 @@ const FormNav = () => {
       </Button>
 
       <FormSearch
-        className="max-md:w-calc-screen--175px max-md:search-navmain"
+        className="max-md:w-calc-screen--165px max-md:search-navmain"
         loading={api.loading}
         value={api.query}
         onChange={changeInput}

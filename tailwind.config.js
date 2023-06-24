@@ -17,7 +17,7 @@ module.exports = {
         '1041': '1041',
       },
       width: {
-        'calc-screen--175px': 'calc(100vw - 175px)',
+        'calc-screen--165px': 'calc(100vw - 165px)',
       },
       minWidth: {
         '400px': '400px',
