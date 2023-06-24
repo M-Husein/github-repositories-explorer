@@ -5,10 +5,10 @@ import { GithubDetailRepoResponse } from '@/types/github';
 export const GET = async (request: Request) => {
   try {
     const { searchParams } = new URL(request.url);
-    const username = searchParams.get("user") || "";
+    const owner = searchParams.get("user") || "";
     const repo = searchParams.get("repo") || "";
 
-    if(!username || !repo){
+    if(!owner || !repo){
       return NextResponse.json(
         { error: "Username and repository name is required" },
         { status: 400 }
@@ -20,7 +20,7 @@ export const GET = async (request: Request) => {
     const { data }: GithubDetailRepoResponse = await octokit.request(
       'GET /repos/{owner}/{repo}',
       {
-        owner: username,
+        owner,
         repo,
         headers: {
           'X-GitHub-Api-Version': '2022-11-28'

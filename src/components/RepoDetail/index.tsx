@@ -26,51 +26,57 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
   const [markdown, setMarkdown] = useState<any>('');
 
   useEffect(() => {
-    let controllerGetDetail: AbortController = new AbortController();
+    let controllerGetDetail: null | AbortController = null;
     let controllerGetReadme: null | AbortController = null;
 
-    (async () => {
-      try {
-        // console.log('user: ', user);
-        // console.log('repo: ', repo);
-        const res: any = await fetchApi(`/api/github/detail?user=${user}&repo=${repo}`, { signal: controllerGetDetail.signal });
-        
-        if(res){
-          setData(res);
-          controllerGetReadme = new AbortController();
+    if(user && repo){
+      controllerGetDetail = new AbortController();
+
+      (async () => {
+        try {
+          console.log('user: ', user);
+          console.log('repo: ', repo);
+          const res: any = await fetchApi(`/api/github/detail?user=${user}&repo=${repo}`, { signal: controllerGetDetail.signal });
           
-          try {
-            const req: any = await fetch(
-              `https://raw.githubusercontent.com/${user}/${repo}/${res.default_branch}/README.md`,
-              { signal: controllerGetReadme.signal }
-            );
-            if(req?.ok){
-              const getMarkdown = await req.text();
-              setMarkdown(getMarkdown);
-            }else{
-              setMarkdown(null);
-              api.setError("Failed get detail");
+          if(res){
+            setData(res);
+            controllerGetReadme = new AbortController();
+            
+            try {
+              const req: any = await fetch(
+                `https://raw.githubusercontent.com/${user}/${repo}/${res.default_branch}/README.md`,
+                { signal: controllerGetReadme.signal }
+              );
+              if(req?.ok){
+                const getMarkdown = await req.text();
+                setMarkdown(getMarkdown);
+              }else{
+                setMarkdown(null);
+                api.setError("Failed get detail");
+              }
+            } catch(e: any) {
+              if(e.name !== 'AbortError'){
+                api.setError(e);
+              }
+            } finally {
+              setLoading(false);
             }
-          } catch(e: any) {
-            if(e.name !== 'AbortError'){
-              api.setError(e);
-            }
-          } finally {
-            setLoading(false);
+          }else{
+            api.setError("Failed get detail");
           }
-        }else{
-          api.setError("Failed get detail");
+        } catch(e: any) {
+          setLoading(false);
+          if(e.name !== 'AbortError'){
+            api.setError(e);
+          }
         }
-      } catch(e: any) {
-        setLoading(false);
-        if(e.name !== 'AbortError'){
-          api.setError(e);
-        }
-      }
-    })();
+      })();
+    }
 
     return () => {
-      controllerGetDetail.abort();
+      if(controllerGetDetail){
+        controllerGetDetail.abort();
+      }
 
       if(controllerGetReadme){
         controllerGetReadme.abort();
