@@ -4,8 +4,7 @@ import { RepoDetail } from '@/components/RepoDetail';
 
 type pageProps = {
   // params: { user: string, repo: string }
-  searchParams?: { user?: string, repo?: string },
-  // stars?: number | string
+  searchParams?: { user?: string, repo?: string }
 }
 
 // export async function generateMetadata(
@@ -31,12 +30,6 @@ type pageProps = {
 //   twitter: {
 //     title: "Detail repository | " + APP_NAME
 //   },
-// }
-
-// Detail.getInitialProps = async (ctx: NextPageContext) => {
-//   const res = await fetch('https://api.github.com/repos/vercel/next.js')
-//   const json = await res.json()
-//   return { stars: json.stargazers_count }
 // }
 
 export default function Detail({ searchParams }: pageProps){

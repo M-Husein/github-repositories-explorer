@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
@@ -18,6 +19,7 @@ type RepoDetailProps = {
 }
 
 export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
+  const searchParams = useSearchParams();
   const api = useApi() as any;
   const contentRef = useRef() as any;
   const [data, setData] = useState<any>();
@@ -25,21 +27,19 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
   const [mountMarkdown, setMountMarkdown] = useState<any>(false);
   const [markdown, setMarkdown] = useState<any>('');
 
-  console.log('user: ', user);
-  console.log('repo: ', repo);
-
   useEffect(() => {
-    console.log('useEffect user: ', user);
-    console.log('useEffect repo: ', repo);
-    
     let controllerGetDetail: null | AbortController = null;
     let controllerGetReadme: null | AbortController = null;
 
     (async () => {
-      if(user && repo){
+      const userFix = user || searchParams.get('user');
+      const repoFix = repo || searchParams.get('repo');
+
+      if(userFix && repoFix){
         controllerGetDetail = new AbortController();
+
         try {
-          const res: any = await fetchApi(`/api/github/detail?user=${user}&repo=${repo}`, { signal: controllerGetDetail.signal });
+          const res: any = await fetchApi(`/api/github/detail?user=${userFix}&repo=${repoFix}`, { signal: controllerGetDetail.signal });
           
           if(res){
             setData(res);
@@ -47,7 +47,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
             
             try {
               const req: any = await fetch(
-                `https://raw.githubusercontent.com/${user}/${repo}/${res.default_branch}/README.md`,
+                `https://raw.githubusercontent.com/${userFix}/${repoFix}/${res.default_branch}/README.md`,
                 { signal: controllerGetReadme.signal }
               );
               if(req?.ok){
@@ -73,7 +73,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
             api.setError(e);
           }
         }
-      } else {
+      }else{
         setLoading(false);
       }
     })();
