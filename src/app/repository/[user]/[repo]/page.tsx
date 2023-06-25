@@ -1,52 +1,41 @@
 import { Metadata } from 'next';
 import { RepoDetail } from '@/components/RepoDetail';
-import { APP_NAME } from '@/const/APPS';
+import { APP_NAME, APP_URL } from '@/const/APPS';
 
 type pageProps = {
   params: { user?: string, repo?: string }
 }
 
-// export const metadata: Metadata = {
-//   title: "Detail repository",
-//   openGraph: {
-//     title: "Detail repository | " + APP_NAME,
-//   },
-//   twitter: {
-//     title: "Detail repository | " + APP_NAME
-//   },
-// }
-
 export async function generateMetadata(
-  { params }: pageProps,
-  // parent: ResolvingMetadata
+  { params }: pageProps
 ): Promise<Metadata> {
-  // read route params
-  // const id = params.id
- 
-  // // fetch data
-  // const product = await fetch(`https://.../${id}`).then((res) => res.json())
- 
-  // // optionally access and extend (rather than replace) parent metadata
-  // const previousImages = (await parent).openGraph?.images || []
- 
-  // return {
-  //   title: product.title,
-  //   openGraph: {
-  //     images: ['/some-specific-page-image.jpg', ...previousImages],
-  //   },
-  // }
-
   const { user, repo } = params;
   const title = user && repo ? user + '/' + repo : "Detail repository";
-  // const title = user + '/' + repo;
+  const description = `Information about a GitHub repository with the name ${repo} created by a ${user}.`;
 
   return {
     title,
+    description,
     openGraph: {
       title: title + " | " + APP_NAME,
+      description,
+      url: APP_URL + "/" + title,
+      siteName: APP_NAME,
+      locale: "en",
+      type: "website",
+      images: [
+        {
+          url: APP_URL + "/img/logo-512x512.png",
+          width: 512,
+          height: 512,
+        }
+      ]
     },
     twitter: {
-      title: title + " | " + APP_NAME
+      card: "summary_large_image",
+      title: title + " | " + APP_NAME,
+      description,
+      images: [APP_URL + "/img/logo-512x512.png"],
     },
   }
 }

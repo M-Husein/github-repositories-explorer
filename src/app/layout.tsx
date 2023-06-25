@@ -26,15 +26,15 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
     url: APP_URL,
     siteName: APP_NAME,
+    locale: "en",
+    type: "website",
     images: [
       {
         url: APP_URL + "/img/gre.png",
         width: 1917,
         height: 927,
       }
-    ],
-    locale: "en",
-    type: "website",
+    ]
   },
   twitter: {
     card: "summary_large_image",

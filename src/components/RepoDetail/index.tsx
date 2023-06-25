@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'next/navigation'; // useSearchParams
+import { useParams } from 'next/navigation';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
@@ -19,7 +19,6 @@ type RepoDetailProps = {
 }
 
 export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
-  // const searchParams = useSearchParams();
   const params = useParams();
   const api = useApi() as any;
   const contentRef = useRef() as any;
