@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation'; // useSearchParams
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
@@ -19,7 +19,8 @@ type RepoDetailProps = {
 }
 
 export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
+  const params = useParams();
   const api = useApi() as any;
   const contentRef = useRef() as any;
   const [data, setData] = useState<any>();
@@ -27,8 +28,8 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
   const [mountMarkdown, setMountMarkdown] = useState<any>(false);
   const [markdown, setMarkdown] = useState<any>('');
 
-  const userFix = user || searchParams.get('user') || '';
-  const repoFix = repo || searchParams.get('repo') || '';
+  const userFix = user || params.user || '';
+  const repoFix = repo || params.repo || '';
 
   useEffect(() => {
     let controllerGetDetail: null | AbortController = null;

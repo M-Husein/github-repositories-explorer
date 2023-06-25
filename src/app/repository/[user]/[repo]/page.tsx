@@ -3,7 +3,7 @@ import { RepoDetail } from '@/components/RepoDetail';
 import { APP_NAME } from '@/const/APPS';
 
 type pageProps = {
-  searchParams?: { user?: string, repo?: string }
+  params?: { user?: string, repo?: string }
 }
 
 export const metadata: Metadata = {
@@ -16,10 +16,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Detail({ searchParams }: pageProps){
+export default function Detail({ params }: pageProps){
   return (
     <div className="w-full max-w-5xl mx-auto p-4 flex flex-col">
-      <RepoDetail {...searchParams} />
+      <RepoDetail {...params} />
     </div>
   );
 }
