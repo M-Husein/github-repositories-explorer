@@ -33,6 +33,14 @@
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   }
 
+  .text-mode {
+    color: var(--b-body-color);
+  }
+
+  a.text-mode:hover {
+    color: var(--b-primary);
+  }
+
   .align--2px {
     vertical-align: -2px;
   }

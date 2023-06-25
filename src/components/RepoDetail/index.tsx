@@ -10,7 +10,7 @@ import { BsEye, BsStarFill, BsLink45Deg, BsDownload } from "react-icons/bs";
 import { Img } from '@/components/Img';
 import { MarkdownView } from '@/components/MarkdownView';
 import { SpeechContent } from '@/components/SpeechContent';
-import { fetchApi, numShort, parseDate } from '@/utils';
+import { fetchApi, numShort, parseDate, parseNumber } from '@/utils';
 import { useApi } from '@/components/Apps';
 
 type RepoDetailProps = {
@@ -166,9 +166,12 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
 
           <div className="my-5 flex flex-col lg:flex-row flex-wrap gap-2">
             <Button
-              as="div"
+              href={`https://github.com/${userFix}/${repoFix}/watchers`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={data.watchers_count ? parseNumber(data.watchers_count) + ' watchers' : ''}
               variant="outline-secondary"
-              className="flex items-center gap-x-2 cursor-auto"
+              className="flex items-center gap-x-2"
             >
               <BsEye />
               Watch
@@ -177,9 +180,12 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
               </b>
             </Button>
             <Button
-              as="div"
+              href={`https://github.com/${userFix}/${repoFix}/forks`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={data.forks_count ? parseNumber(data.forks_count) + ' forks' : ''}
               variant="outline-secondary"
-              className="flex items-center gap-x-2 cursor-auto"
+              className="flex items-center gap-x-2"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/>
@@ -190,9 +196,12 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
               </b>
             </Button>
             <Button
-              as="div"
+              href={`https://github.com/${userFix}/${repoFix}/stargazers`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={data.stargazers_count ? parseNumber(data.stargazers_count) + ' Stars' : ''}
               variant="outline-secondary"
-              className="flex items-center gap-x-2 cursor-auto"
+              className="flex items-center gap-x-2"
             >
               <BsStarFill />
               Starred

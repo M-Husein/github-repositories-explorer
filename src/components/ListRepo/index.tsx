@@ -6,7 +6,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
 import { BsFillStarFill, BsSearch } from "react-icons/bs";
-import { numShort, debounce } from '@/utils';
+import { numShort, parseNumber, debounce } from '@/utils';
 
 type ListRepoProps = {
   id: number | string
@@ -65,7 +65,7 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
       {!!list.length && (
         <div className="sticky top-108px z-20 pt-4 bg-body-tertiary">
           <h6>Repositories ({ list.length })</h6>
-          <fieldset className="row g-2">
+          <div className="row g-2">
             <div className="col-sm-9">
               <div className="input-group">
                 <label className="input-group-text" htmlFor={"iFindRepo" + id}>
@@ -92,7 +92,7 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
                 )}
               </select>
             </div>
-          </fieldset>
+          </div>
           <hr />
         </div>
       )}
@@ -102,18 +102,27 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
           listData.map((repo: any) =>
             <Card
               key={repo.id}
-              as={Link}
-              prefetch={false}
-              // `/repository?user=${repo.owner.login}&repo=${repo.name}`
-              href={`/repository/${repo.owner.login}/${repo.name}`}
-              className="bg-gray-100 hover:bg-gray-200 bg-mode-2 bg-mode-hover shadow-sm no-underline text-gray-600"
+              className="block text-gray-600 overflow-hidden focus-within:ring"
             >
-              <Card.Body>
+              <a
+                href={`https://github.com/${repo.owner.login}/${repo.name}/stargazers`}
+                target="_blank"
+                rel="noopener noreferrer"
+                tabIndex={-1}
+                title={repo.stargazers_count ? parseNumber(repo.stargazers_count) + ' Stars' : ''}
+                className="text-mode small no-underline float-right rounded-bl-2xl rounded-tr pt-1 px-2 pb-2 bg-gray-300 bg-body-tertiary shadow"
+              >
+                {repo.stargazers_count ? numShort(repo.stargazers_count) : 0}
+                <BsFillStarFill className="ml-1 align--2px" />
+              </a>
+
+              <Card.Body
+                as={Link}
+                prefetch={false}
+                href={`/repository/${repo.owner.login}/${repo.name}`}
+                className="block bg-gray-100 hover:bg-gray-200 bg-mode-2 bg-mode-hover no-underline"
+              >
                 <h5>
-                  <small className="float-right rounded-bl-2xl rounded-tr pt-1 px-2 pb-2 -mt-4 -mr-4 ml-2 bg-gray-300 bg-body-tertiary shadow">
-                    {repo.stargazers_count ? numShort(repo.stargazers_count) : 0}
-                    <BsFillStarFill className="ml-1 align--2px" />
-                  </small>
                   <div className="font-bold break-word pr-2">{repo.name}</div>
                 </h5>
 
