@@ -33,12 +33,17 @@ export const SpeechContent = ({
   const [voices, setVoices] = useState<Array<any> | undefined | null>();
   
   useEffect(() => {
-    setVoices(
-      !!speechSyn && !!SpeechUtterance ? 
-        speechSyn.getVoices().map((item: any, i: number) => Object.assign(item, { value: '' + i }) ) 
-        :
-        null
-    );
+    if(!!speechSyn && !!SpeechUtterance){
+      const optionVoices = speechSyn.getVoices().map((item: any, i: number) => Object.assign(item, { value: '' + i }) );
+      setVoices(optionVoices);
+
+      // Older browser don't support the voiceschanged event, 
+      // and just return a list of voices when SpeechSynthesis.getVoices() is fired.
+      // While on others, such as Chrome, you have to wait for the event to fire before populating the list
+      if(speechSyn.onvoiceschanged !== undefined){
+        speechSyn.onvoiceschanged = optionVoices;
+      }
+    }
     // eslint-disable-next-line
   }, []);
 
