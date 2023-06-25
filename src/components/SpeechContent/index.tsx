@@ -34,13 +34,13 @@ export const SpeechContent = ({
   
   useEffect(() => {
     if(!!speechSyn && !!SpeechUtterance){
-      console.log('speechSyn: ', speechSyn);
+      // console.log('speechSyn: ', speechSyn);
 
       const optionVoices = speechSyn.getVoices().map((item: any, i: number) => Object.assign(item, { value: '' + i }) );
       setVoices(optionVoices);
 
-      console.log('optionVoices: ', optionVoices);
-      console.log('speechSyn.onvoiceschanged: ', speechSyn.onvoiceschanged);
+      // console.log('optionVoices: ', optionVoices);
+      // console.log('speechSyn.onvoiceschanged: ', speechSyn.onvoiceschanged);
 
       // Older browser don't support the voiceschanged event, 
       // and just return a list of voices when SpeechSynthesis.getVoices() is fired.
