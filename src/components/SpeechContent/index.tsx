@@ -30,10 +30,15 @@ export const SpeechContent = ({
 
   let speechSyn: any = typeof window !== 'undefined' && window.speechSynthesis;
   const SpeechUtterance: any = typeof window !== 'undefined' && window.SpeechSynthesisUtterance;
-  const [supported, setSupported] = useState(false);
+  const [voices, setVoices] = useState<Array<any> | undefined | null>();
   
   useEffect(() => {
-    setSupported(!!speechSyn && !!SpeechUtterance);
+    setVoices(
+      !!speechSyn && !!SpeechUtterance ? 
+        speechSyn.getVoices().map((item: any, i: number) => Object.assign(item, { value: '' + i }) ) 
+        :
+        null
+    );
     // eslint-disable-next-line
   }, []);
 
@@ -79,10 +84,8 @@ export const SpeechContent = ({
     // eslint-disable-next-line
   }, []);
 
-  const voices = speechSyn.getVoices().map((item: any, i: number) => Object.assign(item, { value: '' + i }) );
-
-  const voiceOptions = Object.entries(
-    voices.reduce((acc: any, obj: any) => {
+  const voiceOptions = () => Object.entries(
+    (voices || []).reduce((acc: any, obj: any) => {
       const key = obj.lang;
       const curGroup = acc[key] ?? [];
       return { ...acc, [key]: [...curGroup, obj] };
@@ -118,7 +121,7 @@ export const SpeechContent = ({
       utteranceRef.current.rate = rateValue;
       utteranceRef.current.pitch = pitchValue;
       utteranceRef.current.volume = volumeValue;
-      utteranceRef.current.voice = voices[+(value || voice)];
+      utteranceRef.current.voice = (voices || [])[+(value || voice)];
 
       speechSynthesis.speak(utteranceRef.current);
     }
@@ -142,7 +145,7 @@ export const SpeechContent = ({
     }
   }
 
-  if(!supported){
+  if(!voices){
     return null;
   }
 
@@ -152,7 +155,7 @@ export const SpeechContent = ({
         value={voice}
         onChange={changeVoice}
       >
-        {voiceOptions.map(([key, options]: [string, any]) =>
+        {voiceOptions().map(([key, options]: [string, any]) =>
           <optgroup key={key} label={key}>
             {options.map((item: any) =>
               <option key={item.value} value={item.value}>

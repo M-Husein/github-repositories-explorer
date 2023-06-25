@@ -33,7 +33,7 @@ const FormNav = () => {
 
   const doSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    api.getUsers();
+    api.getUsers(searchValue);
   }
 
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,6 +96,7 @@ const FormNav = () => {
         value={searchValue}
         onChange={changeInput}
         onSubmit={doSearch}
+        onSpeechEnd={(val) => setSearchValue(val)}
       />
     </div>
   );

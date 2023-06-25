@@ -16,6 +16,7 @@ type FormSearchProps = {
   className?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
+  onSpeechEnd?: (value: string) => void
 }
 
 export const FormSearch = ({
@@ -25,6 +26,7 @@ export const FormSearch = ({
   className,
   onChange,
   onSubmit,
+  onSpeechEnd,
 }: FormSearchProps) => {
   const { resolvedTheme } = useTheme();
   const { setQuery, getUsers } = useApi() as any;
@@ -59,6 +61,7 @@ export const FormSearch = ({
 
         recognition.current.stop();
         setIsEnabled(false);
+        onSpeechEnd?.(transcript);
         setQuery(transcript);
         getUsers(transcript);
       });
@@ -73,7 +76,7 @@ export const FormSearch = ({
         recognition.current.stop();
       }
     }
-  }, [isEnabled, setQuery, getUsers]);
+  }, [isEnabled, setQuery, getUsers, onSpeechEnd]);
 
   const toggleSpeak = (e: React.MouseEvent<HTMLButtonElement>) => {
     if(isEnabled){

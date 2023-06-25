@@ -33,6 +33,13 @@ type pageProps = {
 // }
 
 export default function Detail({ searchParams }: pageProps){
+  // const { user, repo } = searchParams || {};
+  // const dynamicData: any = await fetch(`http://localhost:3000/api/github/detail?user=M-Husein&repo=gmap-places-autocomplete-react`, { cache: 'no-store' });
+
+  // console.log('user: ', user);
+  // console.log('repo: ', repo);
+  // console.log('dynamicData: ', dynamicData);
+
   return (
     <div className="w-full max-w-5xl mx-auto p-4 flex flex-col">
       <RepoDetail {...searchParams} />
