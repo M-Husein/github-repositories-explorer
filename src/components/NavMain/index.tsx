@@ -15,7 +15,8 @@ import logo from '@/assets/img/logo-96x96.png';
 const FormNav = () => {
   const api = useApi() as any;
   const { resolvedTheme: theme, setTheme } = useTheme();
-  const [render, setRender] = useState(true);
+  const [render, setRender] = useState<boolean>(true);
+  const [searchValue, setSearchValue] = useState<string>(api.query);
 
   useEffect(() => {
     setRender(false);
@@ -36,11 +37,7 @@ const FormNav = () => {
   }
 
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    api.setQuery(val);
-    if(!val.length){
-      api.setSearchResult({});
-    }
+    setSearchValue(e.target.value);
   }
 
   const toggleTheme = () => {
@@ -96,7 +93,7 @@ const FormNav = () => {
       <FormSearch
         className="max-md:w-calc-screen--165px max-md:search-navmain"
         loading={api.loading}
-        value={api.query}
+        value={searchValue}
         onChange={changeInput}
         onSubmit={doSearch}
       />

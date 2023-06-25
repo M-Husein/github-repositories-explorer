@@ -22,7 +22,8 @@ export const MarkdownView = ({
     if(typeof onMounted === 'function'){
       onMounted();
     }
-  }, [onMounted]);
+    // eslint-disable-next-line
+  }, []);
 
   const a = ({ node, className, ...props }: any) => {
     const isExternal = props.href !== window.location.origin;
