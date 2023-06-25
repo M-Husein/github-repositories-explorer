@@ -27,14 +27,14 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
   const [mountMarkdown, setMountMarkdown] = useState<any>(false);
   const [markdown, setMarkdown] = useState<any>('');
 
+  const userFix = user || searchParams.get('user') || '';
+  const repoFix = repo || searchParams.get('repo') || '';
+
   useEffect(() => {
     let controllerGetDetail: null | AbortController = null;
     let controllerGetReadme: null | AbortController = null;
 
     (async () => {
-      const userFix = user || searchParams.get('user');
-      const repoFix = repo || searchParams.get('repo');
-
       if(userFix && repoFix){
         controllerGetDetail = new AbortController();
 
@@ -88,7 +88,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
       }
     }
     // eslint-disable-next-line
-  }, [user, repo]);
+  }, [userFix, repoFix]);
 
   const selectAll = (e: any) => {
     e.target.select()
@@ -132,11 +132,11 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
                 width={32}
                 height={32}
                 draggable={false}
-                alt={user}
+                alt={userFix}
                 src={data.owner.avatar_url}
                 className="rounded mr-4"
               />
-              {user}
+              {userFix}
             </a>
             <span className="mx-1">/</span>
             <a
@@ -145,7 +145,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
               rel="noopener noreferrer"
               className="no-underline"
             >
-              {repo}
+              {repoFix}
             </a>
             <small className="inline-block align-middle py-1 px-2 rounded-xl bg-blue-100 bg-mode text-xs ml-2">
               {data.private ? 'Private' : 'Public'}
@@ -229,7 +229,7 @@ export const RepoDetail = ({ user, repo }: RepoDetailProps) => {
                 }
                 <hr className="my-2" />
                 <Dropdown.Item
-                  href={`https://github.com/${user}/${repo}/archive/refs/heads/${data.default_branch}.zip`}
+                  href={`https://github.com/${userFix}/${repoFix}/archive/refs/heads/${data.default_branch}.zip`}
                   download
                 >
                   <BsDownload className="mr-2" />Download ZIP
