@@ -109,7 +109,7 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
             >
               <Card.Body>
                 <h5>
-                  <small className="float-right rounded-bl-2xl rounded-tr pt-1 px-2 pb-2 -mt-4 -mr-4 bg-gray-300 bg-body-tertiary shadow">
+                  <small className="float-right rounded-bl-2xl rounded-tr pt-1 px-2 pb-2 -mt-4 -mr-4 ml-2 bg-gray-300 bg-body-tertiary shadow">
                     {repo.stargazers_count ? numShort(repo.stargazers_count) : 0}
                     <BsFillStarFill className="ml-1 align--2px" />
                   </small>

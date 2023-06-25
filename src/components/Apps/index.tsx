@@ -3,6 +3,7 @@
 import { childrenOnly } from '@/types/common';
 import { createContext, useContext, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import NextTopLoader from 'nextjs-toploader';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { ThemeProvider } from 'next-themes';
@@ -76,6 +77,11 @@ export function Apps({ children }: childrenOnly){
           setError
         }}
       >
+        <NextTopLoader
+          color="#0d6efd"
+          showSpinner={false}
+        />
+        
         {children}
 
         {!!error && (

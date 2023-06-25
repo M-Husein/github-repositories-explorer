@@ -103,7 +103,7 @@ const FormNav = () => {
 }
 
 export const NavMain = () => (
-  <nav className="navbar navbar-expand-lg bg-body-tertiary shadow sticky top-0 z-1040 h-14">
+  <nav className="navbar navbar-expand-lg bg-body-tertiary shadow sticky top-0 z-1030 h-14">
     <div className="container-xxl w-full max-w-5xl mx-auto px-4">
       <Link href="/" className="navbar-brand font-semibold" title={APP_NAME}>
         <Img
