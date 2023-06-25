@@ -11,7 +11,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { user, repo } = params;
   const title = user && repo ? user + '/' + repo : "Detail repository";
-  const description = `Information about a GitHub repository with the name ${repo} created by a ${user}.`;
+  const description = `Information about a GitHub repository called ${repo} created by ${user}.`;
 
   return {
     title,

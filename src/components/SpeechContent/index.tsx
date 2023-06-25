@@ -30,7 +30,7 @@ export const SpeechContent = ({
 
   let speechSyn: any = typeof window !== 'undefined' && window.speechSynthesis;
   const SpeechUtterance: any = typeof window !== 'undefined' && window.SpeechSynthesisUtterance;
-  const [voices, setVoices] = useState<Array<any> | undefined | null>();
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[] | undefined | null>();
 
   const populateVoiceList = useCallback(() => {
     if(!!speechSyn && !!SpeechUtterance){
