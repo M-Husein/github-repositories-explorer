@@ -3,7 +3,6 @@ import { APP_NAME, APP_URL } from '@/const/APPS';
 
 export const metadata: Metadata = {
   title: "About",
-  // description: APP_DESCRIPTION,
   openGraph: {
     title: "About | " + APP_NAME,
     url: APP_URL,

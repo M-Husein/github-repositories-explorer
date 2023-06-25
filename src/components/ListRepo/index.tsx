@@ -108,7 +108,7 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
               className="bg-gray-100 hover:bg-gray-200 bg-mode-2 bg-mode-hover shadow-sm no-underline text-gray-600"
             >
               <Card.Body>
-                <h5 className="flex flex-row flex-wrap">
+                <h5 className="flex flex-row flex-nowrap">
                   <div className="grow font-bold">{repo.name}</div>
                   <small className="flex-none">
                     {repo.stargazers_count ? numShort(repo.stargazers_count) : 0}
