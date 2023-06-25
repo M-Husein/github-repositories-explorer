@@ -108,15 +108,15 @@ export const ListRepo = ({ id, list }: ListRepoProps) => {
               className="bg-gray-100 hover:bg-gray-200 bg-mode-2 bg-mode-hover shadow-sm no-underline text-gray-600"
             >
               <Card.Body>
-                <h5 className="flex flex-row flex-nowrap">
-                  <div className="grow font-bold">{repo.name}</div>
-                  <small className="flex-none">
+                <h5>
+                  <small className="float-right rounded-bl-2xl rounded-tr pt-1 px-2 pb-2 -mt-4 -mr-4 bg-gray-300 bg-body-tertiary">
                     {repo.stargazers_count ? numShort(repo.stargazers_count) : 0}
                     <BsFillStarFill className="ml-1 align--2px" />
                   </small>
+                  <div className="font-bold break-word pr-2">{repo.name}</div>
                 </h5>
 
-                {repo.description && <Card.Text>{repo.description}</Card.Text>}
+                {!!repo.description && <Card.Text>{repo.description}</Card.Text>}
               </Card.Body>
             </Card>
           )
