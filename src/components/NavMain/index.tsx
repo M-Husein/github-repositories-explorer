@@ -58,11 +58,9 @@ const FormNav = () => {
           <BsThreeDotsVertical className="align--2px" />
         </Dropdown.Toggle>
         <Dropdown.Menu className="min-w-0 shadow">
-          <Link href="/about" className="no-underline">
-            <Dropdown.Item as="span">
-              About
-            </Dropdown.Item>
-          </Link>
+          <Dropdown.Item as={Link} href="/about">
+            About
+          </Dropdown.Item>
           <hr className="my-2" />
           <Dropdown.Item
             href="https://github.com/M-Husein/github-repositories-explorer"
