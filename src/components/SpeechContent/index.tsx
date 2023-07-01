@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 import Button from 'react-bootstrap/Button';
 import FormSelect from 'react-bootstrap/FormSelect';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { BsSpeedometer, BsMusicNoteBeamed, BsVolumeUpFill, BsVolumeMuteFill, BsMegaphone, BsStopFill, BsPauseFill } from "react-icons/bs";
+import { BsSpeedometer, BsMusicNoteBeamed, BsVolumeUpFill, BsVolumeMuteFill, BsMegaphone, BsStopFill, BsPauseFill, BsPlusLg, BsDashLg } from "react-icons/bs";
 import { cx } from '@/utils';
 
 type SpeechContentProps = {
@@ -184,8 +184,13 @@ export const SpeechContent = ({
         </Dropdown.Toggle>
         <Dropdown.Menu className="min-w-0 w-full shadow-md">
           <div className="flex flex-col items-center">
-            <b>+</b>
-            <div className="range-v">
+            <Button
+              size="sm"
+              onClick={() => rateValue < 2 && setRateValue(rateValue + 0.1)}
+            >
+              <BsPlusLg />
+            </Button>
+            <div className="range-v mt-2 mb-4">
               <input
                 className="form-range"
                 type="range"
@@ -197,7 +202,12 @@ export const SpeechContent = ({
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRateValue(+e.target.value)}
               />
             </div>
-            <b>-</b>
+            <Button
+              size="sm"
+              onClick={() => +rateValue.toFixed(1) > 0.5 && setRateValue(rateValue - 0.1)}
+            >
+              <BsDashLg />
+            </Button>
           </div>
         </Dropdown.Menu>
       </Dropdown>
@@ -212,8 +222,13 @@ export const SpeechContent = ({
         </Dropdown.Toggle>
         <Dropdown.Menu className="min-w-0 w-full shadow-md">
           <div className="flex flex-col items-center">
-            <b>+</b>
-            <div className="range-v">
+            <Button
+              size="sm"
+              onClick={() => pitchValue < 2 && setPitchValue(pitchValue + 0.1)}
+            >
+              <BsPlusLg />
+            </Button>
+            <div className="range-v mt-2 mb-4">
               <input
                 className="form-range"
                 type="range"
@@ -225,7 +240,12 @@ export const SpeechContent = ({
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPitchValue(+e.target.value)}
               />
             </div>
-            <b>-</b>
+            <Button
+              size="sm"
+              onClick={() => +pitchValue.toFixed(1) > 0.5 && setPitchValue(pitchValue - 0.1)}
+            >
+              <BsDashLg />
+            </Button>
           </div>
         </Dropdown.Menu>
       </Dropdown>
@@ -241,8 +261,13 @@ export const SpeechContent = ({
         </Dropdown.Toggle>
         <Dropdown.Menu className="min-w-0 w-full shadow-md">
           <div className="flex flex-col items-center">
-            <b>+</b>
-            <div className="range-v">
+            <Button
+              size="sm"
+              onClick={() => volumeValue < 1 && setVolumeValue(volumeValue + 0.05)}
+            >
+              <BsPlusLg />
+            </Button>
+            <div className="range-v mt-2 mb-4">
               <input
                 className="form-range"
                 type="range"
@@ -254,7 +279,12 @@ export const SpeechContent = ({
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVolumeValue(+e.target.value)}
               />
             </div>
-            <b>-</b>
+            <Button
+              size="sm"
+              onClick={() => +volumeValue.toFixed(1) > 0 && setVolumeValue(volumeValue - 0.05)}
+            >
+              <BsDashLg />
+            </Button>
           </div>
         </Dropdown.Menu>
       </Dropdown>
