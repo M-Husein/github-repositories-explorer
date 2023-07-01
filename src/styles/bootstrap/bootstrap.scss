@@ -1,14 +1,21 @@
 @import "bootstrap/scss/mixins/banner";
 @include bsBanner("");
 
-// Variable overrides:
-@import "./variables.scss";
-
 // scss-docs-start import-stack
 // Configuration
 @import "bootstrap/scss/functions";
+
+// Variable overrides:
+// https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
+@import './variables.scss';
+
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/variables-dark";
+
+// Remove unused variant
+// https://getbootstrap.com/docs/5.3/customize/sass/#remove-from-map
+$theme-colors: map-remove($theme-colors, "danger", "info", "success", "warning");
+
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
 // @import "utilities";
