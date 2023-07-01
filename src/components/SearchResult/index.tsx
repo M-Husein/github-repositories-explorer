@@ -221,7 +221,7 @@ export function SearchResult(){
           />
 
           {!api.loading && !!api.query.length && api.searchResult?.total_count === 0 && (
-            <div className="invalid-tooltip inline-block relative">
+            <div className="invalid-tooltip bg-red-500 inline-block relative">
               The user you are looking for does not exist
             </div>
           )}

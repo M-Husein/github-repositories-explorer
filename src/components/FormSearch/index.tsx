@@ -135,7 +135,7 @@ export const FormSearch = ({
           </Button>
           
           {isEnabled && (
-            <div className="invalid-tooltip block min-w-max right-0">
+            <div className="invalid-tooltip block bg-red-500 min-w-max right-0">
               Speech now
             </div>
           )}
