@@ -152,6 +152,13 @@ export const SpeechContent = ({
     }
   }
 
+  const minVolume = () => {
+    if(volumeValue > 0){
+      const calc = volumeValue - 0.05;
+      setVolumeValue(calc > 0 ? calc : 0);
+    }
+  }
+
   if(!voices){
     return null;
   }
@@ -281,7 +288,7 @@ export const SpeechContent = ({
             </div>
             <Button
               size="sm"
-              onClick={() => +volumeValue.toFixed(1) > 0 && setVolumeValue(volumeValue - 0.05)}
+              onClick={minVolume}
             >
               <BsDashLg />
             </Button>

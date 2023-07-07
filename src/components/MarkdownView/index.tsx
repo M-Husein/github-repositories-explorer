@@ -75,7 +75,7 @@ export const MarkdownView = ({
   );
 
   
-  const img = ({ node, alt, ...props }: any) => (
+  const img = ({ node, alt, className, ...props }: any) => (
     // eslint-disable-next-line
     <img
       {...props}
@@ -84,6 +84,7 @@ export const MarkdownView = ({
       decoding="async"
       // fetchPriority="low" // OPTION: https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority
       draggable={false}
+      className={cx("max-w-full", className)}
     />
   );
 

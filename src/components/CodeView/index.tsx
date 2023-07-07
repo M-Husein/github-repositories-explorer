@@ -6,10 +6,12 @@ import { PrismAsync } from 'react-syntax-highlighter'; // OPTION: Prism
 import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'; // OPTION theme: materialLight, materialDark
 import Button from 'react-bootstrap/Button';
 import { BsClipboard, BsCheck2 } from 'react-icons/bs';
+import { cx } from '@/utils';
 
 export const CodeView = ({
   language,
   children,
+  prefixClass = "relative",
   ...etc
 }: any) => {
   const { resolvedTheme } = useTheme();
@@ -39,11 +41,11 @@ export const CodeView = ({
   }
 
   return (
-    <div className="relative codeView">
+    <div className={cx(prefixClass, etc.className, !copyMessage && "hide-child")}>
       <Button
         size="sm"
         variant={resolvedTheme}
-        className="absolute top-1 right-1 z-1"
+        className="chide absolute top-1 right-1 z-1"
         tabIndex={-1}
         aria-label="Copy to clipboard"
         disabled={copyMessage}
@@ -60,7 +62,7 @@ export const CodeView = ({
         {...etc}
       >
         {/* eslint-disable-next-line */}
-        {String(children).replace(/\n$/, '')}
+        {('' + children).replace(/\n$/, '')}
       </PrismAsync>
     </div>
   );

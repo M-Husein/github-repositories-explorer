@@ -30,16 +30,10 @@
     a {
       text-decoration: none;
     }
-
-    img {
-      max-width: 100%;
-    }
   }
 
-  .codeView:not(:hover) {
-    > .btn {
-      display: none;
-    }
+  .hide-child:not(:hover) .chide {
+    display: none;
   }
 
   .range-v {
