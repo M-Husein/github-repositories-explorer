@@ -26,7 +26,7 @@ export const MarkdownView = ({
   }, []);
 
   const a = ({ node, className, ...props }: any) => {
-    const isExternal = props.href !== window.location.origin;
+    const isExternal = /^[a-zA-Z][a-zA-Z\d+\-.]*?:/.test(props.href) && !props.href.startsWith(window.location.origin);
     return (
       <a
         {...props}
